@@ -16,7 +16,7 @@ const Navbar = ({containerStyles}) => {
         <div>listing</div>
         </NavLink>
 
-        <NavLink to="https://mail.google.com/mail/?view=cm&fs=1&to=ankursinghsk759@gmail.com" target="_blank" rel="noopener noreferrer" className={ "flexCenter gap-x-1 rounded-full px-2 py-1 cursor-pointer"}>
+        <NavLink to="/contactus"  rel="noopener noreferrer" className={({isActive}) =>isActive ? "active-link flexCenter gap-x-1 rounded-full px-2 py-1 cursor-pointer" : "flexCenter gap-x-1 rounded-full px-2 py-1 cursor-pointer"}>
         <MdPermContactCalendar />
         <div>Contact</div>
         </NavLink>
