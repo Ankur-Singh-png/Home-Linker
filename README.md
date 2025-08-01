@@ -1,2 +1,2 @@
 # Home-Linker
-Property listing and selling web app using React, Node.js, Express, MongoDB, and Prisma.
+Property listing and selling web app using React, Spring Boot, and Hibernate.
