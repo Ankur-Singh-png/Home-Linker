@@ -6,6 +6,8 @@ import Bookings from "./pages/Bookings";
 import Favourites from "./pages/Favourites";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import UserProfile from "./components/UserProfile";
+
 
 
 export default function App() {
@@ -18,6 +20,7 @@ export default function App() {
           <Route path="/addproperty" element={<AddProperty />}/>
           <Route path="/booking" element={<Bookings />}/>
           <Route path="/favourites" element={<Favourites />}/>
+          <Route path="/userprofile" element={<UserProfile/>}/>
         </Routes>
       <Footer /> 
      </BrowserRouter>
