@@ -1,0 +1,143 @@
+/* Base Styles */
+.contact-container {
+  font-family: 'Segoe UI', sans-serif;
+  background-color:rgb(245, 246, 242);
+  padding: 80px 20px 50px;
+  text-align: center;
+  color: #333;
+}
+
+.contact-heading {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2a2a2a;
+}
+
+.contact-location {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* Main Layout */
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 20px;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 768px) {
+  .contact-content {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+  }
+}
+
+/* Left Section - Image and Email */
+.contact-image {
+  text-align: center;
+}
+
+.contact-image img {
+  width: 220px;
+  margin-bottom: 10px;
+}
+
+.contact-image a {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-image a:hover {
+  color: #ff4500;
+  text-decoration: underline;
+}
+
+/* Right Section - Form */
+.contact-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+@media (min-width: 768px) {
+  .contact-form {
+    margin-top: 0;
+  }
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 16px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #68aee8;
+}
+
+.contact-form button {
+  padding: 12px;
+  background: linear-gradient(rgb(138, 194, 67));
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
+}
+
+/* Social Section */
+.socialHandles {
+  margin-top: 3rem;
+  background-color: #f0f2f5;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.socialHandles h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  font-size: 2.2rem;
+}
+
+.social-icons a {
+  color: #333;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #007bff;
+  transform: scale(1.2);
+}

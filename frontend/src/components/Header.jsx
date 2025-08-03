@@ -50,11 +50,12 @@ const Header = () => {
 
             {/* Buttons */}
             <div className='flexBetween gap-x-3 sm:gap-x-5 bold-16'>
-              {!menuOpened ? (<MdMenu onClick={toggleMenu} className='xl:hidden cursor-pointer text-3xl hover:text-secondary'/>) : (<MdClose onClick={toggleMenu} className='xl:hidden cursor-pointer text-3xl hover:text-secondary'/>)}
+              <Link to="/login">
               <button className='btn-secondary flexCenter gap-x-2 medium-16 rounded-full'>
-                <img src={userIcon} alt="" height={21} width={22}/>
+                <img src={userIcon} alt="" height={21} width={22} />
                 <span>Login</span>
               </button>
+            </Link>
             </div>
           </div>
         </div>
