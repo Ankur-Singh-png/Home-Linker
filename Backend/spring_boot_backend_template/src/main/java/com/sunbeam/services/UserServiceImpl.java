@@ -1,6 +1,10 @@
 package com.sunbeam.services;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,18 +18,26 @@ import lombok.AllArgsConstructor;
 @Service
 @Transactional
 @AllArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService , UserDetailsService{
 	
 	private UserDao userDao;
 	private ModelMapper mapper;
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public UserDTO signUp(UserDTO userDTO) {
 		if(userDao.existsByEmail(userDTO.getEmail()) || userDao.existsByPhoneNumber(userDTO.getPhoneNumber())) 
 			throw new ApiException("Email or phone Number already exists");
 		
+		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 		User user = mapper.map(userDTO, User.class);
 		return mapper.map(userDao.save(user),UserDTO.class);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		User u = userDao.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("No user exists!"));
+		return u;
 	}
 
 }

@@ -43,5 +43,4 @@ public class UserDTO {
 	@NotNull
 	@Past(message = "invalid date")
 	private LocalDate dob;
-
 }
