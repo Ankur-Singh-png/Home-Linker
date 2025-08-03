@@ -33,7 +33,7 @@ public class SecurityConfig {
 				.csrf((customizer) -> customizer.disable())
 				.authorizeHttpRequests((request) -> request
 				             .requestMatchers("/user/signin", "/user/signup").permitAll()
-				             .requestMatchers("/admin").hasRole("ADMIN")
+				             .requestMatchers("/admin/**").hasRole("ADMIN")
 				             .anyRequest().authenticated()
 				)
 				.httpBasic(basic -> basic.disable())
