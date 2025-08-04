@@ -9,10 +9,6 @@ const Item = ({property}) => {
     <div className='rounded-2xl p-5 bg-white'>
         <div className='pb-2 relative'>
             <img src={property.image} alt={property.title} className='rounded-xl' />
-            {/* Like Button */}
-            <div className='absolute top-4 right-6'>
-                <FaHeart color='white' size={22} className='cursor-pointer drop-shadow-sm'/>
-            </div>
 
             <h5 className='bold-16 my-1 text-secondary '> {property.city} </h5>
             <h4 className='medium-18 line-clamp-1'> {property.title} </h4>

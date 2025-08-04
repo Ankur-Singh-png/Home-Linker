@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import AddProperty from "./pages/AddProperty";
 import Listing from "./pages/Listing";
@@ -10,23 +10,46 @@ import UserProfile from "./components/UserProfile";
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
+import { useEffect } from "react";
 
-export default function App() {
+function AppContent() {
+  const location = useLocation();
+  const hideHeaderFooter = location.pathname === "/login" || location.pathname === "/register";
+
+  useEffect(() => {
+    window.scrollTo({
+      top:0,
+      left:0,
+      behavior:"smooth"
+    });
+  },[location.pathname])
+
+  return (
+    <>
+      {!hideHeaderFooter && <Header />}
+      <Routes>
+        {/* Default path redirects to /login */}
+        <Route path="/" element={<Navigate to="/login" />} />
+        
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/listing" element={<Listing />} />
+        <Route path="/addproperty" element={<AddProperty />} />
+        <Route path="/booking" element={<Bookings />} />
+        <Route path="/favourites" element={<Favourites />} />
+        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/contactus" element={<ContactUs />} />
+      </Routes>
+      <Footer />
+    </>
+  );
+}
+
+export default function App(){
   return (
     <BrowserRouter>
-      <Header/>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/listing" element={<Listing />}/>
-          <Route path="/addproperty" element={<AddProperty />}/>
-          <Route path="/booking" element={<Bookings />}/>
-          <Route path="/favourites" element={<Favourites />}/>
-          <Route path="/userprofile" element={<UserProfile/>}/>
-          <Route path="/contactus" element={<ContactUs />}/>
-          <Route path="/login" element={<Login />}/>
-          <Route path="/register" element={<Registration />}/>
-        </Routes>
-      <Footer /> 
-    </BrowserRouter>
-  );
+    <AppContent/>
+  </BrowserRouter>
+  )
 }

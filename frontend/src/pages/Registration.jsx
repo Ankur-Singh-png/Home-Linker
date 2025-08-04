@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Registration.css';
 
 function Register() {
@@ -9,7 +9,7 @@ function Register() {
     password: '',
     mobile: ''
   });
-
+  const navigate = useNavigate(); 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -18,6 +18,9 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Registration data submitted:', formData);
+
+    // After login, redirect to home page
+    navigate('/home');
     // You can add validation or API call here
   };
 
@@ -70,19 +73,14 @@ function Register() {
         </div>
 
         <div className='AccountType'>
-        <label>Account Type:</label>
-        <select name="type" value={formData.type} required>
-          <option value="">Select Type</option>
-          <option value="Apartment">Admin</option>
-          <option value="House">Broker</option>
-          <option value="Plot">Normal User</option>
-        </select>
+          <label>Account Type:</label>
+          <input type="text" name="type" value="User" readOnly />
         </div>
 
     <br />
         <div className="form-group full-width">
           Already have an account?
-          <Link to="/login" style={{ color: 'blue' }}> Click here to Login</Link>
+          <Link to="/login" style={{ color: 'rgba(125, 175, 58, 1)' }}> Click here to Login</Link>
         </div>
 
         

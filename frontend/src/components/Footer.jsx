@@ -23,11 +23,6 @@ const Footer = () => {
           <div style={{maxWidth:'50rem'}}>
             <Link to={'/'} className='flex item-center gap-x-2'><span className='font-[900] text-[24px]'>Home<span className='font-[600] medium-20'>Linker</span></span></Link>
             <p className='py-4'>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            <div className='flexBetween pl-6 h-[3.3rem] bg-white w-full max-w-[366px] rounded-full ring-1 ring-slate-500/5'>
-              <input type="email" placeholder='Enter your email' className='bg-transparent border-none outline-none'/>
-
-              <button className='btn-secondary rounded-full relative right-[0.33rem] '>Subscribe</button>
-            </div>
           </div>
           <div className='flex justify-between flex-wrap gap-8'>
           {

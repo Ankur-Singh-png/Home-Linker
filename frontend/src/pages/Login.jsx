@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const navigate = useNavigate(); // navigation hook
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -13,7 +14,8 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Login form submitted:', formData);
-  
+    // After login, redirect to home page
+    navigate('/home');
   };
 
   return (
@@ -44,7 +46,7 @@ function Login() {
 
         <div className="form-group full-width">
           Don't have an account?
-          <Link to="/register" style={{ color: 'blue' }} > Click to Register </Link>
+          <Link to="/register" style={{ color: 'rgba(125, 175, 58, 1)' }}> Click to Register </Link>
         </div>
 
         <button type="submit" className="submit-btn full-width">
