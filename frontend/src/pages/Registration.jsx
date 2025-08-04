@@ -40,14 +40,21 @@ function Register() {
       toast.warn("Date of Birth is required");  
     else{
       
-      const { firstName, lastName, email, phoneNumber, password, dob } = formData;
+      try{
+        const { firstName, lastName, email, phoneNumber, password, dob } = formData;
       const result = await registerUser(firstName, lastName, email, phoneNumber, password, dob);
-      console.log('Registration result :', result);
+      //console.log('Registration result :', result);
       if (result.status === 201) {
         toast.success('Successfully registered new user');
         navigate('/login');
       } else {
         toast.error('Registration failed. Please try again');
+      }
+
+      }catch(error) {
+        console.error("Registration failed:", error);
+        toast.error("Registration failed. Please try again");
+        navigate('/register');
       }
 
     

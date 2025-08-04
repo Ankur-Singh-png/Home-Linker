@@ -20,7 +20,8 @@ function Login() {
       toast.warn("Password is required");
     else {
      
-      const result = await loginUser(formData.email, formData.password);
+      try{
+        const result = await loginUser(formData.email, formData.password);
       //console.log('Login result:', result);
       if (result.status === 200) {
         toast.success('Welcome to Home Linker')
@@ -28,7 +29,13 @@ function Login() {
        //console.log(sessionStorage.getItem('token'))
         navigate('/home')
       } else {
-        toast.error("Login failed. Please check your credentials.");
+        toast.error("Login failed. Please try again");
+      }
+
+      }catch(error) {
+        console.error("Login failed:", error);
+        toast.error("Login failed. Please try again");
+        navigate('/login');
       }
     }
       
