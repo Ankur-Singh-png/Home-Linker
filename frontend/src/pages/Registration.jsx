@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Registration.css';
+import { toast } from 'react-toastify';
+import { registerUser } from '../services/user';
 
 function Register() {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
+    phoneNumber: '',
     password: '',
-    mobile: ''
+    confirmPassword: '',
+    dob: '',
   });
   const navigate = useNavigate(); 
   const handleChange = (e) => {
@@ -15,25 +20,62 @@ function Register() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Registration data submitted:', formData);
+  const onRegister = async () =>{
 
-    // After login, redirect to home page
-    navigate('/home');
-    // You can add validation or API call here
+    if(formData.firstName.length === 0)
+      toast.warn("First Name is required");
+    else if(formData.lastName.length === 0)
+      toast.warn("Last Name is required");
+    else if(formData.email.length === 0)
+      toast.warn("Email is required");
+    else if(formData.phoneNumber.length === 0)
+      toast.warn("Phone Number is required"); 
+    else if(formData.password.length === 0)
+      toast.warn("Password is required");
+    else if(formData.confirmPassword.length === 0)
+      toast.warn("Confirm Password is required");
+    else if(formData.password !== formData.confirmPassword)
+      toast.warn("Passwords do not match");
+    else if(formData.dob.length === 0)
+      toast.warn("Date of Birth is required");  
+    else{
+      
+      const { firstName, lastName, email, phoneNumber, password, dob } = formData;
+      const result = await registerUser(firstName, lastName, email, phoneNumber, password, dob);
+      console.log('Registration result :', result);
+      if (result.status === 201) {
+        toast.success('Successfully registered new user');
+        navigate('/login');
+      } else {
+        toast.error('Registration failed. Please try again');
+      }
+
+    
+    }
+
   };
 
   return (
     <div className="container">
       <h2 className="heading">Registration Form</h2>
-      <form className="form" onSubmit={handleSubmit}>
+      <div className="form" >
         <div className="form-group">
-          <label>Name:</label>
+          <label>FirstName:</label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>LastName:</label>
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
             onChange={handleChange}
             required
           />
@@ -51,6 +93,17 @@ function Register() {
         </div>
 
         <div className="form-group">
+          <label>PhoneNumber:</label>
+          <input
+            type="tel"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
           <label>Password:</label>
           <input
             type="password"
@@ -62,11 +115,11 @@ function Register() {
         </div>
 
         <div className="form-group">
-          <label>Mobile:</label>
+          <label>Confirm Password:</label>
           <input
-            type="tel"
-            name="mobile"
-            value={formData.mobile}
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
             onChange={handleChange}
             required
           />
@@ -77,6 +130,17 @@ function Register() {
           <input type="text" name="type" value="User" readOnly />
         </div>
 
+        <div className="form-group">
+          <label>Date of Birth:</label>
+          <input
+            type="date"
+            name="dob"
+            value={formData.dob}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
     <br />
         <div className="form-group full-width">
           Already have an account?
@@ -84,10 +148,11 @@ function Register() {
         </div>
 
         
-        <button type="submit" className="submit-btn full-width">
+        <button type="submit" className="submit-btn full-width"
+         onClick={onRegister}>
           Register
         </button>
-      </form>
+      </div>
     </div>
   );
 }

@@ -45,8 +45,6 @@ public class User implements UserDetails {
 	private String phoneNumber;
 	@Column(nullable = false)
 	private String password;
-	@Transient
-	private String confirmPassword;
 	private LocalDate dob;
 	@CreationTimestamp
 	@Column(name="creation_date")

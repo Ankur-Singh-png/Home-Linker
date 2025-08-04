@@ -11,6 +11,7 @@ import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import { useEffect } from "react";
+import { ToastContainer } from 'react-toastify'
 
 function AppContent() {
   const location = useLocation();
@@ -41,6 +42,7 @@ function AppContent() {
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/contactus" element={<ContactUs />} />
       </Routes>
+      <ToastContainer />
       <Footer />
     </>
   );
