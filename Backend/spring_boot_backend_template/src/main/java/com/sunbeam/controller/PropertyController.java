@@ -11,6 +11,7 @@ public class PropertyController {
 	
 	@GetMapping("/list")
 	public ResponseEntity<?>  GetList() {
+		System.out.println("In property controller");
 		return ResponseEntity.ok("fetched ok");
 		
 	}

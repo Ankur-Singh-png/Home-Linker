@@ -46,11 +46,13 @@ public class SecurityConfig {
 	
 	@Bean
 	PasswordEncoder passwordEncoder() {
+		System.out.println("In password encode bean");
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
 	AuthenticationManager authenticationManager (AuthenticationConfiguration config) throws Exception{
+		System.out.println("In authentication manager bean");
 		return config.getAuthenticationManager();
 	}
 

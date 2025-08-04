@@ -39,11 +39,13 @@ public class UserController {
 	@PostMapping("/signin")
 	public ResponseEntity<?> LoginUser( @RequestBody AuthRequest authDTO){
 		Authentication auth = new UsernamePasswordAuthenticationToken(authDTO.getEmail(), authDTO.getPassword());
-		System.out.println("BEFORE AUTH: " + auth);
+		System.out.println("BEFORE AUTH: " + auth + auth.isAuthenticated() + auth.getPrincipal().getClass());
 		auth = authManager.authenticate(auth);
-		System.out.println("AFTER AUTH: " + auth);
-		// after authentication, create JWT token and return.
+		System.out.println("AFTER AUTH: " + auth + auth.isAuthenticated() + auth.getPrincipal().getClass());
+
+        System.out.println("Creating token");
 		String token = jwtUtil.createToken(auth);
+		System.out.println("Token created");
 		return ResponseEntity.ok(token);
 	}
 	

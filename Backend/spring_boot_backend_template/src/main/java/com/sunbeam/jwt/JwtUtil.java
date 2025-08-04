@@ -13,9 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-
-
-
+import com.sunbeam.custom_exceptions.GlobalExceptionHandler;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -24,17 +22,14 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 public class JwtUtil {
-
-    private final ModelMapper modelMapper;
+    
 	@Value(value="${jwt.token.expiration.millis}")
 	public long jwtExpiration;
 	@Value(value="${jwt.token.secret}")
 	public String jwtSecret;
 	private SecretKey jwtKey;
 
-    JwtUtil(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
+   
 	
 	@PostConstruct
 	public void init() {
@@ -42,10 +37,12 @@ public class JwtUtil {
 	}
 	
 	public String createToken(Authentication auth) {
+		System.out.println("In create token method");
 		System.out.println("before casting" + auth.getClass() + auth.getPrincipal());
 		//User user = (User)auth.getPrincipal();
 		System.out.println( "After casting");
 		String subject = auth.getName(); // user email
+		System.out.println(subject+"subject");
 		String roles = auth.getAuthorities().stream()	// user role e.g. ROLE_USER or ROLE_ADMIN
 				.map(authority -> authority.getAuthority())
 				.collect(Collectors.joining(","));
@@ -56,10 +53,12 @@ public class JwtUtil {
 			.claim("role", roles)
 			.signWith(jwtKey)
 			.compact();
+		System.out.println("At last of token creating method");
 		return token;
 	}
 	
 	public Authentication validateToken(String token) {
+		System.out.println("In validating token method");
 		JwtParser parser = Jwts.parser().verifyWith(jwtKey).build();
 		Claims claims = parser
 							.parseSignedClaims(token)

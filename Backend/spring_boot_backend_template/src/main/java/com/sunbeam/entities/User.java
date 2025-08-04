@@ -58,10 +58,12 @@ public class User implements UserDetails {
 	private UserRole userRole = UserRole.ROLE_USER;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		System.out.println("In get authorites method");
 		return List.of(new SimpleGrantedAuthority(this.userRole.name()));
 	}
 	@Override
 	public String getUsername() {
+		System.out.println("In get userName/useremail method");
 		return this.email;
 	}
 
