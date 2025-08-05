@@ -14,15 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
-
-    private final PropertyController propertyController;
 	@Autowired
 	private JwtUtil jwtUtil;
 
-    JwtFilter(PropertyController propertyController) {
-        this.propertyController = propertyController;
-    }
-	
+   
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
