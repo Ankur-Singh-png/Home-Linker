@@ -17,6 +17,7 @@ import com.sunbeam.services.UserService;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import main.java.com.sunbeam.dto.UpdateUserDTO;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -56,5 +57,17 @@ public class UserController {
 	public String getString() {
 		return "yash";
 	}
+
+
+	@GetMapping("/{id}")
+	public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+		return ResponseEntity.ok(userService.getUserDTOById(id));
+	}
+
+	  @PutMapping("/{id}")
+	   public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody @Valid UpdateUserDTO updateDTO) {
+	       userService.updateUserFromDTO(id, updateDTO);
+	       return ResponseEntity.ok("User updated successfully");
+	   }
 
 }

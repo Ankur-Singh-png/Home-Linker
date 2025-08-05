@@ -7,6 +7,7 @@ import Favourites from "./pages/Favourites";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import UserProfile from "./components/UserProfile";
+import UpdateProfile from "./pages/Profile/UpdateProfile";
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
@@ -41,6 +42,7 @@ function AppContent() {
             <Route path="/booking" element={<Bookings />} />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/updateprofile/:id" element={<UpdateProfile/>}/>
             <Route path="/contactus" element={<ContactUs />} />
             {/* <Route path="/wishlist" element={< />}/>
             <Route path="/mybooking" element={< />}/>
