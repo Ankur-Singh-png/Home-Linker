@@ -1,0 +1,118 @@
+/* Container */
+.profileContainer {
+  background-color: rgb(245, 246, 242);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+/* Card */
+.profileCard {
+  position: relative;
+  top: 50px;
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar Section */
+.profileAvatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.updateProfileImage {
+  width: 40%;
+  height: 250px;
+  padding-bottom: 10px;
+}
+
+/* Form */
+.profileForm label {
+  font-weight: 600;
+  display: block;
+  margin: 12px 0 5px;
+  text-align: left;
+}
+
+.profileForm input,
+.profileForm textarea {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  margin-bottom: 10px;
+  padding-right: 40px;
+}
+
+/* Buttons */
+.btnUpdate {
+  width: 100%;
+  background-color: rgb(138, 194, 67);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.btnUpdate:hover {
+  background-color: rgb(122, 189, 35);
+}
+
+.btnCancel {
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgb(217, 73, 37);
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.btnCancel:hover {
+  background-color: rgb(199, 59, 52);
+}
+
+.errorMessage {
+  font-size: 0.9rem;
+  color: red;
+  margin-bottom: 10px;
+  /* min-height: 18px; */
+}
+
+.passwordSection {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pageTitle {
+  background-color: rgb(138, 194, 67);
+  color: white;
+  text-align: center;
+  padding: 12px;
+  font-size: 22px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+}
+
+.inputGroup {
+  /* This class was missing in your CSS — added for your inputs */
+  margin-bottom: 10px;
+}

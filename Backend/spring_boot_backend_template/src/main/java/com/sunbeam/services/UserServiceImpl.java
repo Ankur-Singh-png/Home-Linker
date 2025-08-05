@@ -14,6 +14,7 @@ import com.sunbeam.dto.UserDTO;
 import com.sunbeam.entities.User;
 
 import lombok.AllArgsConstructor;
+import main.java.com.sunbeam.dto.UpdateUserDTO;
 
 @Service
 @Transactional
@@ -40,6 +41,37 @@ public class UserServiceImpl implements UserService , UserDetailsService{
 		User u = userDao.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("No user exists!"));
 		System.out.println("In load username method after checking from database");
 		return u;
+	}
+
+
+	@Override
+	public UserDTO getUserDTOById(Long id) {
+		// TODO Auto-generated method stub
+		
+		User user = userDao.findById(id)
+                .orElseThrow(() -> new ApiException("User not found"));
+
+       
+        UserDTO dto = mapper.map(user, UserDTO.class);
+        dto.setPassword(""); 
+        return dto;
+	}
+
+	@Override
+	public void updateUserFromDTO(Long id, UpdateUserDTO dto) {
+	    User user = userDao.findById(id)
+	            .orElseThrow(() -> new ApiException("User not found"));
+
+	    // Configure ModelMapper to ignore nulls
+	    mapper.getConfiguration().setSkipNullEnabled(true);
+	    mapper.map(dto, user); // This maps all non-null fields from dto to user
+
+	    // Handle password separately to ensure it's encoded
+	    if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
+	        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+	    }
+
+	    userDao.save(user);
 	}
 
 }
