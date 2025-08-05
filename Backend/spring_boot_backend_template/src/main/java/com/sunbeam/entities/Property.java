@@ -24,7 +24,7 @@ import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
-@ToString(exclude = {"category","owner","images"})
+@ToString(exclude = {"category","owner"})
 @Getter
 @Setter
 @Table(name = "property_details")
@@ -51,8 +51,7 @@ public class Property {
 	private boolean isWifi;
 	private boolean isParking;
 	private boolean isFurnished;
-	@Lob
-	private byte[] image;
+	
 	
 	@CreationTimestamp
 	@Column(name="creation_date")
@@ -60,6 +59,12 @@ public class Property {
 	@UpdateTimestamp
 	@Column(name="updated_on")
 	private LocalDate updatedOn;
+	
+	private String imageName;
+	
+	private String imageType;
+	@Lob
+	private byte[] imageData;
 	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
@@ -69,17 +74,6 @@ public class Property {
     @JoinColumn(name = "owner_id")
     private User owner;
 	
-	@OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<PropertyImage> images = new ArrayList<PropertyImage>();
-
-
-	public void addImage(PropertyImage image) {
-	    images.add(image);
-	    image.setProperty(this);
-	}
-
-	public void removeImage(PropertyImage image) {
-	    images.remove(image);
-	    image.setProperty(null);
-	}
+	
+	
 }
