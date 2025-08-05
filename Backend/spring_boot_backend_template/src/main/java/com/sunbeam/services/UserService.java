@@ -4,7 +4,7 @@ package com.sunbeam.services;
 
 import com.sunbeam.dto.UserDTO;
 
-import main.java.com.sunbeam.dto.UpdateUserDTO;
+import com.sunbeam.dto.UpdateUserDTO;
 
 public interface UserService{
 	UserDTO signUp(UserDTO userDTO);

@@ -1,6 +1,7 @@
 package com.sunbeam.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,7 +19,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,30 +32,56 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "properties")
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(length =20 ,name = "first_name")
 	private String firstName;
+	
 	@Column(length =20 ,name = "last_name") 
 	private String lastName;
+	
 	@Column(unique = true)
 	private String email;
+	
 	@Column(length=10, unique = true ,nullable = false,name = "phone_number")
 	private String phoneNumber;
+	
 	@Column(nullable = false)
 	private String password;
+	
 	private LocalDate dob;
+	
 	@CreationTimestamp
 	@Column(name="creation_date")
 	private LocalDate creationDate;
+	
 	@UpdateTimestamp
 	@Column(name="updated_on")
 	private LocalDate updatedOn;
+	
 	@Enumerated(EnumType.STRING)
 	private UserRole userRole = UserRole.ROLE_USER;
+	
+	
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Property> properties = new ArrayList<Property>();
+
+	
+    public void addProperty(Property property) {
+        properties.add(property);
+        property.setOwner(this);
+    }
+
+    public void removeProperty(Property property) {
+        properties.remove(property);
+        property.setOwner(null);
+    }
+	
+    
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		System.out.println("In get authorites method");

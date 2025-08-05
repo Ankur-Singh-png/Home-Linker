@@ -14,7 +14,7 @@ import com.sunbeam.dto.UserDTO;
 import com.sunbeam.entities.User;
 
 import lombok.AllArgsConstructor;
-import main.java.com.sunbeam.dto.UpdateUserDTO;
+import com.sunbeam.dto.UpdateUserDTO;
 
 @Service
 @Transactional
