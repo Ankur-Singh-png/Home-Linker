@@ -32,7 +32,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "properties")
+@ToString(exclude = {"properties","bookings","wishlist"})
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,10 +66,26 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private UserRole userRole = UserRole.ROLE_USER;
 	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		System.out.println("In get authorites method");
+		return List.of(new SimpleGrantedAuthority(this.userRole.name()));
+	}
+	@Override
+	public String getUsername() {
+		System.out.println("In get userName/useremail method");
+		return this.email;
+	}
+	
 	
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Property> properties = new ArrayList<Property>();
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings = new ArrayList<Booking>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WishList> wishlist = new ArrayList<WishList>();
 	
     public void addProperty(Property property) {
         properties.add(property);
@@ -81,16 +97,25 @@ public class User implements UserDetails {
         property.setOwner(null);
     }
 	
+    public void addBooking(Booking booking) {
+        bookings.add(booking);
+        booking.setUser(this);
+    }
+
+    public void removeBooking(Booking booking) {
+        bookings.remove(booking);
+        booking.setUser(null);
+    }
     
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		System.out.println("In get authorites method");
-		return List.of(new SimpleGrantedAuthority(this.userRole.name()));
-	}
-	@Override
-	public String getUsername() {
-		System.out.println("In get userName/useremail method");
-		return this.email;
-	}
+    public void addWishlistItem(WishList wishlistItem) {
+        wishlist.add(wishlistItem);
+        wishlistItem.setUser(this);
+    }
+
+    public void removeWishlistItem(WishList wishlistItem) {
+        wishlist.remove(wishlistItem);
+        wishlistItem.setUser(null);
+    }
+
 
 }

@@ -55,11 +55,6 @@ public class UserController {
 		return ResponseEntity.ok(token);
 	}
 	
-	@GetMapping("/get")
-	public String getString() {
-		return "yash";
-	}
-
 
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
