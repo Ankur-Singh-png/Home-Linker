@@ -18,38 +18,45 @@ function AppContent() {
 
   useEffect(() => {
     window.scrollTo({
-      top:0,
-      left:0,
-      behavior:"smooth"
+      top: 0,
+      left: 0,
+      behavior: "smooth"
     });
-  },[location.pathname])
+  }, [location.pathname]);
+
 
   return (
     <>
       {!hideHeaderFooter && <Header />}
-      <Routes>
-        {/* Default path redirects to /login */}
-        <Route path="/" element={<Navigate to="/login" />} />
+      <div style={{ display: 'flex' , zIndex:'1000'}}>
         
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Registration />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/listing" element={<Listing />} />
-        <Route path="/addproperty" element={<AddProperty />} />
-        <Route path="/booking" element={<Bookings />} />
-        <Route path="/favourites" element={<Favourites />} />
-        <Route path="/userprofile" element={<UserProfile />} />
-        <Route path="/contactus" element={<ContactUs />} />
-      </Routes>
-      <Footer />
+        <div style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/listing" element={<Listing />} />
+            <Route path="/addproperty" element={<AddProperty />} />
+            <Route path="/booking" element={<Bookings />} />
+            <Route path="/favourites" element={<Favourites />} />
+            <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/contactus" element={<ContactUs />} />
+            {/* <Route path="/wishlist" element={< />}/>
+            <Route path="/mybooking" element={< />}/>
+            <Route path="/myproperties" element={< />}/> */}
+          </Routes>
+        </div>
+      </div>
+      {!hideHeaderFooter && <Footer />}
     </>
   );
 }
 
-export default function App(){
+export default function App() {
   return (
     <BrowserRouter>
-    <AppContent/>
-  </BrowserRouter>
-  )
+      <AppContent />
+    </BrowserRouter>
+  );
 }

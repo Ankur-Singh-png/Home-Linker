@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import { MdClose, MdMenu } from 'react-icons/md'
 import userIcon from "../assets/user.svg"
+import { GiHamburgerMenu } from "react-icons/gi";
+import Sidebar from './Sidebar/Sidebar';
 
 const Header = () => {
 
   const [active, setActive] = useState(false);
   const [menuOpened, setMenuOpened] = useState(false)
   const toggleMenu = () => setMenuOpened(!menuOpened)
+  const [ showNav, setShowNav ] = useState(false);
+
 
   useEffect(()=> {
     const handleScroll = ()=> {
@@ -36,7 +40,7 @@ const Header = () => {
         <div className={`${active ? "py-0" : "py-1"}max-padd-container bg-white transition-all duration-200 rounded-full px-5 ring-1 ring-slate-900/5`}>
           <div className='flexBetween py-3'>
             {/* Logo */}
-            <Link to={'/'}>
+            <Link to={'/home'}>
               <span className='font-[900] text-[24px]'>Home<span className='font-[600] medium-20'>Linker</span></span>
             </Link>
 
@@ -56,6 +60,11 @@ const Header = () => {
                 <span>Login</span>
               </button>
               </Link>
+
+              <div>
+              <GiHamburgerMenu style={{ color: '#8ac243', fontSize: '24px' , margin:'5px'}} onClick={() => setShowNav(!showNav)}/>
+              <Sidebar showNav={showNav} setShowNav={setShowNav} />
+            </div>
             </div>
           </div>
         </div>

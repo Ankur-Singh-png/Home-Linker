@@ -1,0 +1,54 @@
+.sidenav {
+  width: 300px;
+  background: #8ac243;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  padding: 0 30px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out; /* 1s is a bit slow */
+  z-index: 1000;
+}
+
+.sidenav.active {
+  transform: translateX(0%);
+}
+
+ul{
+    padding: 0;
+}
+
+ul li{
+    list-style-type:none;
+    margin:10px 0;
+}
+
+ul li a{
+    color: #eaecef;
+    text-decoration:none;
+    font-size: 16px;
+    display: block;
+    padding:10px 15px;
+    border-radius: 6px;
+    position: relative;
+    top: 50px;
+}
+
+ul li a:hover,
+ul li a.active{
+    background: #222222;
+}
+
+.btncontainer{
+    justify-content:space-between;
+    align-items:flex-end;
+    
+}
+
+.closebtn{
+    color: #ffffff;
+    font-size: 24px ;
+    margin:5px;
+    cursor: pointer;
+}
