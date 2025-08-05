@@ -11,6 +11,7 @@ import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import { useEffect } from "react";
+import { ToastContainer } from 'react-toastify'
 
 function AppContent() {
   const location = useLocation();
@@ -30,6 +31,7 @@ function AppContent() {
       {!hideHeaderFooter && <Header />}
       <div style={{ display: 'flex' , zIndex:'1000'}}>
         
+<<<<<<< HEAD
         <div style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
@@ -49,6 +51,20 @@ function AppContent() {
         </div>
       </div>
       {!hideHeaderFooter && <Footer />}
+=======
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/listing" element={<Listing />} />
+        <Route path="/addproperty" element={<AddProperty />} />
+        <Route path="/booking" element={<Bookings />} />
+        <Route path="/favourites" element={<Favourites />} />
+        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/contactus" element={<ContactUs />} />
+      </Routes>
+      <ToastContainer />
+      <Footer />
+>>>>>>> 4c0591a82a72f1bfe3a703d2f7c247061f140468
     </>
   );
 }

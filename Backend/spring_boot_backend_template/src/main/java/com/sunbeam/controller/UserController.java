@@ -4,12 +4,12 @@ import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sunbeam.dto.AuthRequest;
 import com.sunbeam.dto.UserDTO;
 import com.sunbeam.jwt.JwtUtil;
@@ -26,6 +26,7 @@ import org.springframework.security.core.Authentication;
 @RequestMapping("/user")
 @Validated
 @AllArgsConstructor
+@CrossOrigin
 public class UserController {
 	private UserService userService;
 	private AuthenticationManager authManager;
@@ -33,6 +34,8 @@ public class UserController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> RegisterUser( @RequestBody @Valid UserDTO userDTO){
+		System.out.println(userDTO);
+		//ApiResponse<UserDTO> response = new ApiResponse<>("success", "User registered successfully", userService.signUp(userDTO));
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.signUp(userDTO));	
 	}
 	
