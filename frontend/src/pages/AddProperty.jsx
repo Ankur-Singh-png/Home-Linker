@@ -62,27 +62,27 @@ const AddProperty = () => {
   e.preventDefault();
 
   if (!formData.title.trim()) {
-    toast.error("Title is required");
+    toast.warn("Title is required");
   } else if (!formData.description.trim()) {
-    toast.error("Description is required");
+    toast.warn("Description is required");
   } else if (!formData.address.trim()) {
-    toast.error("Address is required");
+    toast.warn("Address is required");
   } else if (!formData.city.trim()) {
-    toast.error("City is required");
+    toast.warn("City is required");
   } else if (!formData.state.trim()) {
-    toast.error("State is required");
+    toast.warn("State is required");
   } else if (!formData.country.trim()) {
-    toast.error("Country is required");
+    toast.warn("Country is required");
   } else if (!formData.pincode.trim()) {
-    toast.error("Pincode is required");
+    toast.warn("Pincode is required");
   } else if (!formData.area || formData.area <= 0) {
-    toast.error("Area must be greater than 0");
+    toast.warn("Area must be greater than 0");
   } else if (!formData.categoryId) {
-    toast.error("Please select a category");
+    toast.warn("Please select a category");
   } else if (!formData.price || formData.price <= 0) {
-    toast.error("Price must be greater than 0");
+    toast.warn("Price must be greater than 0");
   } else if (!image) {
-    toast.error("Please upload an image");
+    toast.warn("Please upload an image");
   } else {
     const formDataToSubmit  = new FormData();
     formDataToSubmit.append("imageFile", image);
@@ -92,7 +92,7 @@ const AddProperty = () => {
     console.log(result);
     if(result.status === 201) {
       toast.success("Property added successfully");
-      navigate("/properties");   
+      navigate("/home");   
   }
   else {
       toast.error("Failed to add property");
@@ -106,7 +106,7 @@ const AddProperty = () => {
   return (
     <div className="property-container">
       <h2 className="heading">Add Property for Sale</h2>
-      <form className="form" onSubmit={handleSubmit}>
+      <div className="form">
         <div className="form-group">
           <label>Title:</label>
           <input type="text" name="title" value={formData.title} onChange={handleInputChange} required />
@@ -219,8 +219,8 @@ const AddProperty = () => {
             Furnished
           </label>
         </div>
-        <button type="submit" className="submitbtn">Submit Property</button>
-      </form>
+        <button type="submit" className="submitbtn" onClick={handleSubmit}>Submit Property</button>
+      </div>
     </div>
   );
 };

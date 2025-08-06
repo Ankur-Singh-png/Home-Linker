@@ -15,7 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.*;
 
-
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 
 import lombok.AllArgsConstructor;
 
@@ -69,6 +70,15 @@ public class SecurityConfig {
 	AuthenticationManager authenticationManager (AuthenticationConfiguration config) throws Exception{
 		System.out.println("In authentication manager bean");
 		return config.getAuthenticationManager();
+	}
+	
+	@Bean
+	Cloudinary cloudinary(){
+		return new Cloudinary(ObjectUtils.asMap(
+				"cloud_name","dmxue5ff3",
+				"api_key","826292514539866",
+				"api_secret","gh1zn7F0Qdn9Wq4OzPwpMnOePMw"
+		));
 	}
 
 }

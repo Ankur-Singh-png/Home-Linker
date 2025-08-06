@@ -65,11 +65,7 @@ public class Property {
 	@Column(name="updated_on")
 	private LocalDate updatedOn;
 	
-	private String imageName;
-	
-	private String imageType;
-	@Lob
-	private byte[] imageData;
+	private String imageURL;;
 	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
