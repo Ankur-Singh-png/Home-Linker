@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./AddProperty.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom"; 
+import { registerProperty } from "../services/Property";
 
 const AddProperty = () => {
   const [formData, setFormData] = useState({
@@ -14,21 +15,23 @@ const AddProperty = () => {
     pincode: "",
     area: 0.0,
     price: 0.0,
-    isAvailable: true,
+    available: true,
     bedrooms: 0,
     kitchens: 0,
     bathrooms: 0,
     halls: 0,
-    isTV: false,
-    isAC: false,
-    isWifi: false,
-    isParking: false,
-    isFurnished: false,
+    tv: false,
+    ac: false,
+    wifi: false,
+    parking: false,
+    furnished: false,
     ownerId: "Jhon Smith",
+    categoryId:"",
   });
 
   //const [categoryId, setCategoryId] = useState("");
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
   
 
   
@@ -43,6 +46,7 @@ const AddProperty = () => {
  
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
+    console.log(name + "" + checked)
     setFormData((prev) => ({
       ...prev,
       [name]: checked
@@ -54,7 +58,7 @@ const AddProperty = () => {
   setImage(e.target.files[0]);
 };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
   e.preventDefault();
 
   if (!formData.title.trim()) {
@@ -81,11 +85,19 @@ const AddProperty = () => {
     toast.error("Please upload an image");
   } else {
     const formDataToSubmit  = new FormData();
-    formDataToSubmit.append("image", image);
-    formDataToSubmit.append("product",  new Blob([JSON.stringify(formData)], { type: "application/json" }));
+    formDataToSubmit.append("imageFile", image);
+    formDataToSubmit.append("property",  new Blob([JSON.stringify(formData)], { type: "application/json" }));
 
-    
+    const result = await registerProperty(formDataToSubmit);
+    console.log(result);
+    if(result.status === 201) {
+      toast.success("Property added successfully");
+      navigate("/properties");   
   }
+  else {
+      toast.error("Failed to add property");
+    }   
+}
 
 };
   
@@ -183,27 +195,27 @@ const AddProperty = () => {
 
         <div className="checkbox-group">
           <label>
-            <input type="checkbox" name="isAvailable" checked={formData.isAvailable} onChange={handleCheckboxChange} />
+            <input type="checkbox" name="available" checked={formData.available} onChange={handleCheckboxChange} />
             Available
           </label>
           <label>
-            <input type="checkbox" name="isTV" checked={formData.isTV} onChange={handleCheckboxChange} />
+            <input type="checkbox" name="tv" checked={formData.tv} onChange={handleCheckboxChange} />
             TV
           </label>
           <label>
-            <input type="checkbox" name="isAC" checked={formData.isAC} onChange={handleCheckboxChange} />
+            <input type="checkbox" name="ac" checked={formData.ac} onChange={handleCheckboxChange} />
             AC
           </label>
           <label>
-            <input type="checkbox" name="isWifi" checked={formData.isWifi} onChange={handleCheckboxChange} />
+            <input type="checkbox" name="wifi" checked={formData.wifi} onChange={handleCheckboxChange} />
             WiFi
           </label>
           <label>
-            <input type="checkbox" name="isParking" checked={formData.isParking} onChange={handleCheckboxChange} />
+            <input type="checkbox" name="parking" checked={formData.parking} onChange={handleCheckboxChange} />
             Parking
           </label>
           <label>
-            <input type="checkbox" name="isFurnished" checked={formData.isFurnished} onChange={handleCheckboxChange} />
+            <input type="checkbox" name="furnished" checked={formData.furnished} onChange={handleCheckboxChange} />
             Furnished
           </label>
         </div>

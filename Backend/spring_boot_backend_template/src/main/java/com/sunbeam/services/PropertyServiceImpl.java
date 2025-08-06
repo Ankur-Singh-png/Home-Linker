@@ -16,8 +16,8 @@ public class PropertyServiceImpl implements PropertyService{
 
 	@Override
 	public boolean addProperty(Property property) {
-		// TODO Auto-generated method stub
-		return false;
+		propertydao.save(property);
+		return true;
 	}
 
 }

@@ -45,16 +45,17 @@ public class Property {
 	private String pincode;
 	private double area;
 	private double price;
-	private boolean isAvailable;
 	private int bedrooms;
 	private int kitchens;
 	private int bathrooms;
 	private int halls;
-	private boolean isTV;
-	private boolean isAC;
-	private boolean isWifi;
-	private boolean isParking;
-	private boolean isFurnished;
+	private boolean available;
+	private boolean tv;
+	private boolean ac;
+	private boolean wifi;
+	private boolean parking;
+	private boolean furnished;
+
 	
 	
 	@CreationTimestamp
