@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './UpdateProfile.module.css';
 import UpdateProfileIcon from '../../assets/UpdateProfile.jpg';
+import { getUserById, updateUser } from '../../services/user';
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
@@ -21,15 +22,11 @@ const UpdateProfile = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-
-    const token = sessionStorage.getItem('token');
-    axios.get(`http://localhost:8080/user/${id}`,
-    {headers: { Authorization: `Bearer ${token}`
-    }})
-      .then(res => {
-        const user = res.data;
+    const fetchUser = async () => {
+      try {
+        const token = sessionStorage.getItem('token');
+        const user = await getUserById(id, token);
         setFormData({
-          ...formData,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
@@ -38,21 +35,22 @@ const UpdateProfile = () => {
           confirmPassword: '',
           dob: user.dob,
         });
-      })
-      .catch(err => {
-        console.error('Failed to load user data', err);
+      } catch (err) {
+        console.error(err);
         setError('Failed to load user data');
-      });
+      }
+    };
+
+    fetchUser();
   }, [id]);
 
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  // const location = useLocation();
-  // const userDataFromState = location.state?.user;
 
-  const handleSubmit = e => {
+
+  const handleSubmit = async  e => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
@@ -69,17 +67,14 @@ const UpdateProfile = () => {
       dob: formData.dob
     };
 
-    axios.put(`http://localhost:8080/user/${id}`, updatedData, { headers: {
-      Authorization: `Bearer ${token}`
-    }})
-      .then(() => {
-        alert('Profile updated successfully');
-        navigate('/userprofile');
-      })
-      .catch(err => {
-        console.error('Update failed', err);
-        setError('Update failed');
-      });
+    try {
+      await updateUser(id, updatedData, token);
+      alert('Profile updated successfully');
+      navigate('/userprofile');
+    } catch (err) {
+      console.error(err);
+      setError('Update failed');
+    }
   };
 
   const handleCancel = () => {

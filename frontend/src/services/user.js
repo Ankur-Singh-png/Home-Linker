@@ -29,3 +29,32 @@ export async function loginUser(email, password) {
     console.log(`exception: `, ex)
   }
 }
+
+
+
+
+// function to fetch user by ID
+export async function getUserById(id, token) {
+  try {
+    const response = await axios.get(`http://localhost:8080/user/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+  } catch (ex) {
+    console.log('Failed to fetch user data:', ex);
+    throw ex;
+  }
+}
+
+// function to update user
+export async function updateUser(id, updatedData, token) {
+  try {
+    const response = await axios.put(`http://localhost:8080/user/${id}`, updatedData, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+  } catch (ex) {
+    console.log('Failed to update user:', ex);
+    throw ex;
+  }
+}
