@@ -22,7 +22,7 @@ function Login() {
      
       try{
         const result = await loginUser(formData.email, formData.password);
-      //console.log('Login result:', result);
+      console.log('Login result:', result);
       if (result.status === 200) {
         toast.success('Welcome to Home Linker')
        sessionStorage.setItem('token', result.data);

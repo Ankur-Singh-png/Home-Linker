@@ -24,6 +24,7 @@ export async function loginUser(email, password) {
 
     // make the api call
     const response = await axios.post(url, body)
+    console.log(`response: `, response)
     return response
   } catch (ex) {
     console.log(`exception: `, ex)

@@ -74,4 +74,10 @@ public class UserServiceImpl implements UserService , UserDetailsService{
 	    userDao.save(user);
 	}
 
+	@Override
+	public UserDTO getUserDTOByEmail(String email) {
+		User u = userDao.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("No user exists!"));
+		return mapper.map(u, UserDTO.class);
+	}
+
 }
