@@ -11,6 +11,7 @@ import UpdateProfile from "./pages/Profile/UpdateProfile";
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
+import MyProperties from "./pages/myproperties/MyProperties";
 import { useEffect } from "react";
 import { ToastContainer } from 'react-toastify'
 
@@ -47,6 +48,7 @@ function AppContent() {
             {/* <Route path="/wishlist" element={< />}/>
             <Route path="/mybooking" element={< />}/>
             <Route path="/myproperties" element={< />}/> */}
+             <Route path="/myproperties/:userId" element={<MyProperties/>} />
           </Routes>
           <ToastContainer />
         </div>

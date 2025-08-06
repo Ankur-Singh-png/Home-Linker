@@ -4,6 +4,10 @@ import { NavLink, Link } from 'react-router-dom';
 import { IoClose } from "react-icons/io5";
 
 const Sidebar = ({ showNav, setShowNav }) => {
+
+  const userId = sessionStorage.getItem('userId');
+
+
   return (
     <div className={`sidenav ${showNav ? 'active' : ''}`}>
     
@@ -34,7 +38,7 @@ const Sidebar = ({ showNav, setShowNav }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/myproperties" >
+          <NavLink to={`/myproperties/${userId}`} >
             My Properties
           </NavLink>
         </li>
