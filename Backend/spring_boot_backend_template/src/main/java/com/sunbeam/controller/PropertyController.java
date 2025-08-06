@@ -50,4 +50,10 @@ public class PropertyController {
 		
 	}
 
+	@GetMapping("/myproperties/{userId}")
+    public ResponseEntity<?> getMyProperties(@PathVariable Long userId) {
+        List<PropertySummaryDTO> properties = propertyService.getPropertiesByUserId(userId);
+        return ResponseEntity.ok(properties);
+    }
+
 }

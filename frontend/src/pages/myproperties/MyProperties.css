@@ -1,0 +1,46 @@
+    /* Page container */
+  .page-container {
+    padding: 2rem;
+    padding-top: 6rem;
+    font-family: 'Arial', sans-serif;
+    
+  }
+  
+  /* Page title */
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: white;
+    background:   rgb(138, 194, 67);
+    border: 1px solid #28a745;;
+    border-radius: 10px;
+  }
+  
+  /* Property list */
+  .property-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Individual property card */
+  .property-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f9f9f9;
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .property-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* No properties message */
+  .no-properties {
+    font-style: italic;
+    color: #666;
+  }
+  

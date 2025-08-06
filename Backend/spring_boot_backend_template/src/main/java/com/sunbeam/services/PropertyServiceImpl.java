@@ -1,7 +1,9 @@
 package com.sunbeam.services;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,8 +13,10 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.sunbeam.dao.PropertyDao;
 import com.sunbeam.entities.Property;
+import com.sunbeam.dto.PropertySummaryDTO;
 
 import lombok.AllArgsConstructor;
+import main.java.com.sunbeam.dto.PropertySummaryDTO;
 
 @Service
 @Transactional
@@ -40,6 +44,28 @@ public class PropertyServiceImpl implements PropertyService{
 	    Property savedProperty = propertydao.save(property);
 	    return true;
 	}
+
+
+	  @Override
+    public List<PropertySummaryDTO> getPropertiesByUserId(Long userId) {
+        
+        List<Property> properties = propertydao.findByOwnerId(userId); 
+        return properties.stream()
+            .map(this::convertToSummaryDTO)
+            .collect(Collectors.toList());
+    }
+
+	private PropertySummaryDTO convertToSummaryDTO(Property p) {
+        return new PropertySummaryDTO(
+            p.getId(),
+            p.getTitle(),
+            p.getCity(),
+            p.getState(),
+            p.getPrice(),
+            p.isAvailable()
+           
+        );
+    }
 
 
 	
