@@ -11,25 +11,27 @@ import com.sunbeam.dto.PropertyRequestDTO;
 import com.sunbeam.dto.PropertySummaryDTO;
 
 public interface PropertyService {
-	boolean addProperty(PropertyRequestDTO property , MultipartFile imageFile) throws IOException;
-	List<PropertySummaryDTO> getPropertiesByUserId(Long userId);
-	 List<PropertyDto> findAllByOrderByPriceAsc();
-	   
-	   List<PropertyDto> findAllByOrderByPriceDesc();
-	   
-	   List<PropertyDto> findAllByOrderByDate();
-	   
-	   List<PropertyDto> findAllPropertiesByState(String state);
-	   
-	   List<PropertyDto> findAllPropertiesByCity(String city);
-	   
-	   List<PropertyDto> findAllPropertiesByBedrooms(int bedrooms);
-	   
-	   List<PropertyDto> findAllPropertiesByAvailability(boolean available);
-	   
-	   PropertyDto findPropertyById(Long id);
+	boolean addProperty(PropertyRequestDTO property, MultipartFile imageFile) throws IOException;
 
-	   public String deletePropertyById(Long id);
-	   
-	   public String updatePropertyById(Long id , PropertyDto dto);
+	List<PropertySummaryDTO> getPropertiesByUserId(Long userId);
+
+	List<PropertyDto> findAllByOrderByPriceAsc();
+
+	List<PropertyDto> findAllByOrderByPriceDesc();
+
+	List<PropertyDto> findAllByOrderByDate();
+
+	List<PropertyDto> findAllPropertiesByState(String state);
+
+	List<PropertyDto> findAllPropertiesByCity(String city);
+
+	List<PropertyDto> findAllPropertiesByBedrooms(int bedrooms);
+
+	List<PropertyDto> findAllPropertiesByAvailability(boolean available);
+
+	PropertyDto findPropertyById(Long id);
+
+	public String deletePropertyById(Long id);
+
+	public String updatePropertyById(Long id , Property dto);
 }
