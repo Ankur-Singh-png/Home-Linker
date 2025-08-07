@@ -24,7 +24,7 @@ const Item = ({property}) => {
         <p className='pt-2 mb-4 line-clamp-2'>{property.description}</p>
         <div className='flexBetween'>
             <div >₹{property.price}0000.00</div>
-            <Link to={'/'}>
+            <Link to={`/details/${property.id}`}>
             <button className='btn-secondary rounded-xl !py-[6px] !px-4 shadow-sm'>View Details</button></Link>
         </div>
     </div>

@@ -39,7 +39,7 @@ const Listing = () => {
         <div className='grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-10'>
           {
             properties.map((property)=>(
-                <Item key={property.title} property={property}/> 
+                <Item key={property.id} property={property}/> 
               )
             )
           }
@@ -50,4 +50,4 @@ const Listing = () => {
   )
 }
 
-export default Listing
+export default Listing
