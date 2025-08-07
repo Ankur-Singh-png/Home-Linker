@@ -12,7 +12,7 @@ import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import MyProperties from "./pages/myproperties/MyProperties";
-import ViewDetails from "./pages/View Details/ViewDetails";
+import ViewDetails from "./pages/ViewDetails/ViewDeails";
 import { useEffect } from "react";
 import { ToastContainer } from 'react-toastify'
 import PropertyFilter from './pages/PropertyFilter';
@@ -48,8 +48,8 @@ function AppContent() {
             <Route path="/updateprofile/:id" element={<UpdateProfile/>}/>
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/filters" element={<PropertyFilter/>}/>
-             <Route path="/myproperties/:userId" element={<MyProperties/>} />
-             <Route path="/details/:propertyId" element={<ViewDetails/>} />
+            <Route path="/myproperties/:userId" element={<MyProperties/>} />
+            <Route path="/details/:propertyId" element={<ViewDetails/>} />
           </Routes>
           <ToastContainer />
         </div>
