@@ -1,46 +1,115 @@
-    /* Page container */
-  .page-container {
-    padding: 2rem;
-    padding-top: 6rem;
-    font-family: 'Arial', sans-serif;
-    
-  }
-  
-  /* Page title */
-  .page-title {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    color: white;
-    background:   rgb(138, 194, 67);
-    border: 1px solid #28a745;;
-    border-radius: 10px;
-  }
-  
-  /* Property list */
-  .property-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* Individual property card */
-  .property-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: #f9f9f9;
-    transition: box-shadow 0.2s ease;
-  }
-  
-  .property-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* No properties message */
-  .no-properties {
-    font-style: italic;
-    color: #666;
-  }
-  
+/* Page container */
+.page-container {
+  padding: 2rem;
+  padding-top: 6rem;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Page title */
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: white;
+  background: rgb(138, 194, 67);
+  border: 1px solid #28a745;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+}
+
+/* Property list */
+.property-list {
+  list-style-type: disc; /* Adds bullets */
+  padding-left: 2rem;    /* Indent the list */
+  margin: 0;
+}
+
+/* Individual property list item */
+.property-card {
+  margin-bottom: 1rem;
+  background: none;
+  border: none;
+  padding: 0.2rem 0;
+  list-style-position: outside;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Property details inside each li */
+.property-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.property-card p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+}
+
+.property-card:focus,
+.property-card *:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+.button-group {
+  margin-top: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Update button */
+.update-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #218838;
+}
+
+/* Delete button */
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* No properties message */
+.no-properties {
+  font-style: italic;
+  color: #666;
+  text-align: center;
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.property-image {
+  width: 100%;
+  max-width: 400px; /* Limit the max size */
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover; /* Maintain aspect ratio and cover */
+  display: block;
+  margin-bottom: 0.5rem;
+}
+

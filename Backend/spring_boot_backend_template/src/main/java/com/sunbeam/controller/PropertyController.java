@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sunbeam.dto.PropertyRequestDTO;
+import com.sunbeam.dto.PropertySummaryDTO;
+import com.sunbeam.dto.UpdatePropertyDTO;
 import com.sunbeam.entities.Property;
 import com.sunbeam.services.PropertyService;
-import com.sunbeam.dto.*;
 
 import lombok.AllArgsConstructor;
 
@@ -103,4 +105,29 @@ public class PropertyController {
     public ResponseEntity<?> updateProperty(@PathVariable Long id , @RequestBody Property dto){
     	return ResponseEntity.ok(propertyService.updatePropertyById(id, dto));
     }
+
+
+    
+    @GetMapping("/myproperties/{userId}/{propertyId}")
+    public ResponseEntity<?> getPropertyByUserAndId(@PathVariable Long userId, @PathVariable Long propertyId) {
+        return ResponseEntity.ok(propertyService.findPropertyByIdAndOwnerId(userId, propertyId));
+    }
+
+
+    @PutMapping("/updateproperty/{userId}/{propertyId}")
+    public ResponseEntity<?> updatePropertyByUser(
+            @PathVariable Long userId,
+            @PathVariable Long propertyId,
+            @RequestBody UpdatePropertyDTO  dto)
+    {
+
+ 
+            String result = propertyService.updatePropertyByUser(userId, propertyId, dto);
+            return ResponseEntity.ok(result);
+       
+    }
+
+
+
+
 }

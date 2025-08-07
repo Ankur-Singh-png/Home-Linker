@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import MyProperties from "./pages/myproperties/MyProperties";
 import ViewDetails from "./pages/ViewDetails/ViewDeails";
+import UpdateProperty from "./pages/myproperties/UpdateProperty";
 import { useEffect } from "react";
 import { ToastContainer } from 'react-toastify'
 import PropertyFilter from './pages/PropertyFilter';
@@ -50,6 +51,7 @@ function AppContent() {
             <Route path="/filters" element={<PropertyFilter/>}/>
             <Route path="/myproperties/:userId" element={<MyProperties/>} />
             <Route path="/details/:propertyId" element={<ViewDetails/>} />
+            <Route path="/updateproperties/:userId/:propertyId" element={<UpdateProperty/>} />
           </Routes>
           <ToastContainer />
         </div>

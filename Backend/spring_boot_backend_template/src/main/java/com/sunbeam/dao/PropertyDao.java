@@ -1,6 +1,7 @@
 package com.sunbeam.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -17,5 +18,7 @@ public interface PropertyDao extends JpaRepository<Property, Long>
      List<Property> findByBedrooms(int bedrooms);
      
      List<Property> findByAvailable(boolean available);
+
+      Optional<Property> findByIdAndOwnerId(Long id, Long ownerId);
 
 }

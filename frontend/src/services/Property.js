@@ -106,3 +106,62 @@ export const addtoBooking = async (propertyId) => {
     throw error;
   } 
 };
+
+
+
+
+
+export const fetchPropertyById = async (userId, propertyId) => {
+  try {
+    const token = sessionStorage.getItem("token");
+    const response = await axios.get(
+      `${BASE_URL}/myproperties/${userId}/${propertyId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching property:", error);
+    throw error;
+  }
+};
+
+
+export const updateProperty = async (userId, propertyId, formData) => {
+  try {
+    const token = sessionStorage.getItem("token");
+    const response = await axios.put(
+      `${BASE_URL}/updateproperty/${userId}/${propertyId}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error updating property:", error);
+    throw error;
+  }
+};
+
+
+export const deleteProperty = async (propertyId) => {
+  try {
+    const token = sessionStorage.getItem("token");
+    const response = await axios.delete(`${BASE_URL}/delete/${propertyId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error deleting property:", error);
+    throw error;
+  }
+};
