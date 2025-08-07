@@ -25,4 +25,6 @@ public interface PropertyService {
 	   List<PropertyDto> findAllPropertiesByBedrooms(int bedrooms);
 	   
 	   List<PropertyDto> findAllPropertiesByAvailability(boolean available);
+	   
+	   PropertyDto findPropertyById(Long id);
 }

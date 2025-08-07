@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.sunbeam.custom_exceptions.ApiException;
 import com.sunbeam.dao.PropertyDao;
 import com.sunbeam.dto.PropertyDto;
 import com.sunbeam.dto.PropertySummaryDTO;
@@ -50,25 +51,12 @@ public class PropertyServiceImpl implements PropertyService{
 	}
 
 
-	  @Override
-    public List<PropertySummaryDTO> getPropertiesByUserId(Long userId) {
-        
-        List<Property> properties = propertydao.findByOwnerId(userId); 
-        return properties.stream()
-            .map(this::convertToSummaryDTO)
-            .collect(Collectors.toList());
-    }
-
-	private PropertySummaryDTO convertToSummaryDTO(Property p) {
-        return new PropertySummaryDTO(
-            p.getId(),
-            p.getTitle(),
-            p.getCity(),
-            p.getState(),
-            p.getPrice(),
-            p.isAvailable()
-           
-        );
+	@Override
+    public List<PropertySummaryDTO> getPropertiesByUserId(Long userId) 
+    {
+        List<Property> properties = propertydao.findByOwnerId(userId);
+        return properties.stream().
+        		map(property->mapper.map(property, PropertySummaryDTO.class)).toList();
     }
 
 	@Override
@@ -111,6 +99,13 @@ public class PropertyServiceImpl implements PropertyService{
 	public List<PropertyDto> findAllPropertiesByAvailability(boolean available) {
 		List<Property> list = propertydao.findByAvailable(available);
 		return list.stream().map(property->mapper.map(property, PropertyDto.class)).toList();
+	}
+
+
+	@Override
+	public PropertyDto findPropertyById(Long id) {
+		Property property=propertydao.findById(id).orElseThrow(()-> new ApiException("Property not found"));
+	    return mapper.map(property, PropertyDto.class);
 	}
 	
 }
