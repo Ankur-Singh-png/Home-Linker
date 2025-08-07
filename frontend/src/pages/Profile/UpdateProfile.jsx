@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './UpdateProfile.module.css';
-import UpdateProfileIcon from '../../assets/UpdateProfile.jpg';
+
 import { getUserById, updateUser } from '../../services/user';
 
 const UpdateProfile = () => {
@@ -89,7 +89,7 @@ const UpdateProfile = () => {
           <h2>Update Profile Page</h2>
         </div>
         <div className={styles.profileAvatar}>
-          <img src={UpdateProfileIcon} alt='Update-Profile_Img' className={styles.updateProfileImage} />
+          <img  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"alt='Update-Profile_Img' className={styles.updateProfileImage} />
         </div>
 
         <form onSubmit={handleSubmit} className={styles.profileForm}>
