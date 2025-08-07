@@ -28,4 +28,8 @@ public interface PropertyService {
 	   List<PropertyDto> findAllPropertiesByAvailability(boolean available);
 	   
 	   PropertyDto findPropertyById(Long id);
+
+	   public String deletePropertyById(Long id);
+	   
+	   public String updatePropertyById(Long id , PropertyDto dto);
 }
