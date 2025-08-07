@@ -1,34 +1,50 @@
-import React from 'react'
-import { FaHeart } from 'react-icons/fa6'
-import { MdOutlineBathtub, MdOutlineBed, MdOutlineGarage } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import { CgRuler } from 'react-icons/cg'
+import React from 'react';
+import { MdOutlineBathtub, MdOutlineBed, MdOutlineGarage } from 'react-icons/md';
+import { CgRuler } from 'react-icons/cg';
+import { Link } from 'react-router-dom';
 
-const Item = ({property}) => {
+const Item = ({ property }) => {
   return (
-    <div className='rounded-2xl p-5 bg-white'>
-        <div className='pb-2 relative'>
-            <img src={property.imageURL} alt={property.title} className='rounded-xl' />
+    <div className="rounded-2xl bg-white shadow-md p-4 flex flex-col h-full transition-transform hover:scale-[1.02] duration-300">
+      {/* Image Container */}
+      <div className="w-full h-60 overflow-hidden rounded-xl mb-4">
+        <img
+          src={property.imageURL}
+          alt={property.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-            <h5 className='bold-16 my-1 text-secondary '> {property.city} </h5>
-            <h4 className='medium-18 line-clamp-1'> {property.title} </h4>
+      {/* Title & City */}
+      <div className="mb-2">
+        <p className="text-sm text-green-600 font-semibold">{property.city}</p>
+        <h3 className="text-lg font-bold text-gray-900 line-clamp-1">{property.title}</h3>
+      </div>
 
-            {/* Information */}
-            <div className='flex gap-x-2 py-2'>
-                <div className='flexCenter gap-x-2 border-r border-slate-900/50 pr-4 font-[500] '><MdOutlineBed />{property.bedrooms}</div>
-                <div className='flexCenter gap-x-2 border-r border-slate-900/50 pr-4 font-[500] '><MdOutlineBathtub />{property.bathrooms}</div>
-                <div className='flexCenter gap-x-2 border-r border-slate-900/50 pr-4 font-[500] '><MdOutlineGarage />{property.halls}</div>
-                <div className='flexCenter gap-x-2 border-r border-slate-900/50 pr-4 font-[500] '><CgRuler /> 400 </div>
-            </div>
-        </div>
-        <p className='pt-2 mb-4 line-clamp-2'>{property.description}</p>
-        <div className='flexBetween'>
-            <div >₹{property.price}0000.00</div>
-            <Link to={`/details/${property.id}`}>
-            <button className='btn-secondary rounded-xl !py-[6px] !px-4 shadow-sm'>View Details</button></Link>
-        </div>
+      {/* Property Info */}
+      <div className="flex gap-x-3 text-gray-700 text-sm font-medium mb-3">
+        <div className="flex items-center gap-x-1 border-r pr-3"><MdOutlineBed />{property.bedrooms}</div>
+        <div className="flex items-center gap-x-1 border-r pr-3"><MdOutlineBathtub />{property.bathrooms}</div>
+        <div className="flex items-center gap-x-1 border-r pr-3"><MdOutlineGarage />{property.halls}</div>
+        <div className="flex items-center gap-x-1"><CgRuler />400</div>
+      </div>
+
+      {/* Description */}
+      <p className="text-gray-600 text-sm mb-4 line-clamp-2">{property.description}</p>
+
+      {/* Footer: Price & Button */}
+      <div className="mt-auto flex justify-between items-center">
+        <p className="text-lg font-semibold text-black">
+          ₹{property.price}
+        </p>
+        <Link to={`/details/${property.id}`}>
+          <button className="bg-green-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-green-700 transition">
+            View Details
+          </button>
+        </Link>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Item
+export default Item;
