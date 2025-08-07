@@ -30,6 +30,7 @@ public class BookingServiceImpl implements BookingService {
             throw new ApiException("Property already in Booking.");
         User user = userDao.findById(userId).orElseThrow(() -> new ApiException("User not found"));
         Property property = propertyDao.findById(propertyId).orElseThrow(() -> new ApiException("Property not found"));
+        property.setAvailable(false);
         Booking b = new Booking();
         b.setUser(user);
         b.setProperty(property);

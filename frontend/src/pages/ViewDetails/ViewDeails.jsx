@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { addtowishlist } from '../../services/Property';
+import { addtoBooking, addtowishlist } from '../../services/Property';
 
 const ViewDetails = () => {
   const { propertyId } = useParams();
   const navigate = useNavigate();
   const [details, setDetails] = useState(null);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isBooking, setIsBooking] = useState(false);
 
 
   useEffect(() => {
@@ -30,17 +31,21 @@ const ViewDetails = () => {
 
   const formatBoolean = (value) => (value ? 'Yes' : 'No');
 
-  const handleBookNow = () => {
-    const userId = sessionStorage.getItem('userId');
-    const propertyId = details.id;
-    console.log(`Booking property with ID: ${propertyId} for user ID: ${userId}`);
-    alert('Booking functionality is not implemented yet.');
+  const handleBookNow = async () => {
+    try {
+    const response = await addtoBooking(details.id);
+
+    if (response.status === 200) {
+      toast.success('Property Booking done successfully');
+      setIsBooking(true);
+    }
+  } catch (error) {
+    console.error("Failed to add to Booking:", error);
+    toast.error("Something went wrong while adding to Booking");
+  }
   }
 
   const handleAddtoWishlist = async () => {
-  const userId = sessionStorage.getItem('userId');
-  const propertyId = details.id;
-
   try {
     const response = await addtowishlist(details.id);
 
@@ -118,22 +123,30 @@ return (
             </ul>
           </div>
 
-          {/* Buttons */}
-          <div className="pt-6 flex gap-4">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md transition" onClick ={handleBookNow}>
+                  <div className="pt-6 flex gap-4">
+          {/* Booking button */}
+          {isBooking ? (
+            <button className="bg-gray-400 text-white px-6 py-2 rounded-lg shadow-md cursor-not-allowed" disabled>
+              ✅ Booked
+            </button>
+          ) : (
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md transition" onClick={handleBookNow}>
               📅 Book Now
             </button>
-            {isWishlisted ? (
-  <button className="bg-gray-400 text-white px-6 py-2 rounded-lg shadow-md cursor-not-allowed" disabled>
-    ✅ Added to Wishlist
-  </button>
-) : (
-  <button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-lg shadow-md transition" onClick={handleAddtoWishlist}>
-    ❤️ Add to Wishlist
-  </button>
-)}
+          )}
 
-          </div>
+          {/* Wishlist button */}
+          {isWishlisted ? (
+            <button className="bg-gray-400 text-white px-6 py-2 rounded-lg shadow-md cursor-not-allowed" disabled>
+              ✅ Added to Wishlist
+            </button>
+          ) : (
+            <button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-lg shadow-md transition" onClick={handleAddtoWishlist}>
+              ❤️ Add to Wishlist
+            </button>
+          )}
+</div>
+
         </div>
       </div>
     </div>
