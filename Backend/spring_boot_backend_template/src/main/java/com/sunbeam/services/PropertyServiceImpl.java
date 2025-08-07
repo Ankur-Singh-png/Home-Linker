@@ -122,5 +122,48 @@ public class PropertyServiceImpl implements PropertyService{
 		Property property=propertydao.findById(id).orElseThrow(()-> new ApiException("Property not found"));
 	    return mapper.map(property, PropertyDto.class);
 	}
-	
+
+	@Override
+	public String deletePropertyById(Long id) {
+		Property property=propertydao.findById(id).orElseThrow(()-> new ApiException("Property Not found"));
+		propertydao.delete(property);
+		return "Property Deleted successfully";
+	}
+
+
+	@Override
+	public String updatePropertyById(Long id , PropertyDto dto) {
+		Property property=propertydao.findById(id).orElseThrow(()-> new ApiException("Property Not found"));
+		
+		property.setTitle(dto.getTitle());
+        property.setDescription(dto.getDescription());
+        property.setAddress(dto.getAddress());
+        property.setCity(dto.getCity());
+        property.setState(dto.getState());
+        property.setCountry(dto.getCountry());
+        property.setPincode(dto.getPincode());
+        property.setArea(dto.getArea());
+        property.setPrice(dto.getPrice());
+        property.setAvailable(dto.isAvailable());
+        property.setBedrooms(dto.getBedrooms());
+        property.setKitchens(dto.getKitchens());
+        property.setBathrooms(dto.getBathrooms());
+        property.setHalls(dto.getHalls());
+        property.setTv(dto.isTv());
+        property.setAc(dto.isAc());
+        property.setWifi(dto.isWifi());
+        property.setParking(dto.isParking());
+        property.setFurnished(dto.isFurnised());
+        property.setCreationDate(dto.getCreationDate());
+        
+        if (dto.getCategory() != null && dto.getCategory().getId() != null) {
+            Category category = categoryDao.findById(dto.getCategory().getId())
+                    .orElseThrow(() -> new RuntimeException("Category not found"));
+            property.setCategory(category);
+        }
+
+        propertydao.save(property);
+        
+		return "Property Updated Successfully";
+	}
 }
