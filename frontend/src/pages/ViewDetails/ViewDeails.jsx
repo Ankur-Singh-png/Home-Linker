@@ -8,6 +8,8 @@ const ViewDetails = () => {
   const { propertyId } = useParams();
   const navigate = useNavigate();
   const [details, setDetails] = useState(null);
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
 
   useEffect(() => {
     const fetchProperty = async () => {
@@ -44,6 +46,7 @@ const ViewDetails = () => {
 
     if (response.status === 200) {
       toast.success('Property added to wishlist successfully');
+      setIsWishlisted(true);
     }
   } catch (error) {
     console.error("Failed to add to wishlist:", error);
@@ -120,9 +123,16 @@ return (
             <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md transition" onClick ={handleBookNow}>
               📅 Book Now
             </button>
-            <button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-lg shadow-md transition" onClick={handleAddtoWishlist}>
-              ❤️ Add to Wishlist
-            </button>
+            {isWishlisted ? (
+  <button className="bg-gray-400 text-white px-6 py-2 rounded-lg shadow-md cursor-not-allowed" disabled>
+    ✅ Added to Wishlist
+  </button>
+) : (
+  <button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-lg shadow-md transition" onClick={handleAddtoWishlist}>
+    ❤️ Add to Wishlist
+  </button>
+)}
+
           </div>
         </div>
       </div>
