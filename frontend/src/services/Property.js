@@ -66,3 +66,24 @@ export const getAllPropertiesByDate = async () => {
   } 
 
 } 
+
+export const addtowishlist = async (propertyId) => {
+  try {
+    const token = sessionStorage.getItem('token');    
+    const userId = sessionStorage.getItem('userId');
+    const response = await axios.post(
+      `http://localhost:8080/wishlist/${propertyId}`,
+      {}, 
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Failed to add to wishlist:", error);
+    throw error;
+  } 
+};
+

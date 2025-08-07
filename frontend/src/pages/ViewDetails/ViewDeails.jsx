@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { addtowishlist } from '../../services/Property';
 
 const ViewDetails = () => {
   const { propertyId } = useParams();
@@ -25,6 +27,32 @@ const ViewDetails = () => {
   }, [propertyId]);
 
   const formatBoolean = (value) => (value ? 'Yes' : 'No');
+
+  const handleBookNow = () => {
+    const userId = sessionStorage.getItem('userId');
+    const propertyId = details.id;
+    console.log(`Booking property with ID: ${propertyId} for user ID: ${userId}`);
+    alert('Booking functionality is not implemented yet.');
+  }
+
+  const handleAddtoWishlist = async () => {
+  const userId = sessionStorage.getItem('userId');
+  const propertyId = details.id;
+
+  try {
+    const response = await addtowishlist(details.id);
+
+    if (response.status === 200) {
+      toast.success('Property added to wishlist successfully');
+    }
+  } catch (error) {
+    console.error("Failed to add to wishlist:", error);
+    toast.error("Something went wrong while adding to wishlist");
+  }
+};
+
+
+
 return (
   details && (
     <div className="min-h-screen bg-gray-100 py-8 px-4 md:px-12">
@@ -89,10 +117,10 @@ return (
 
           {/* Buttons */}
           <div className="pt-6 flex gap-4">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md transition">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md transition" onClick ={handleBookNow}>
               📅 Book Now
             </button>
-            <button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-lg shadow-md transition">
+            <button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-lg shadow-md transition" onClick={handleAddtoWishlist}>
               ❤️ Add to Wishlist
             </button>
           </div>
