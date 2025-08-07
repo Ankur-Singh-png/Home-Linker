@@ -85,4 +85,9 @@ public class PropertyController {
     public ResponseEntity<?> getAllPropertiesByAvailability(@PathVariable boolean available){
     	return ResponseEntity.ok(propertyService.findAllPropertiesByAvailability(available));
     } 
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProperty(@PathVariable Long id){
+    	return ResponseEntity.ok(propertyService.findPropertyById(id));
+    }
 }

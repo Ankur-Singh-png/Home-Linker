@@ -43,8 +43,8 @@ const Sidebar = ({ showNav, setShowNav }) => {
           </NavLink>
         </li>
          <li>
-          <NavLink to="/filters" >
-             Filters
+          <NavLink to="/userprofile" >
+             Profile
           </NavLink>
         </li>
       </ul>
