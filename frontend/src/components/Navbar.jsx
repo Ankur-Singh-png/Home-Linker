@@ -27,9 +27,9 @@ const Navbar = ({containerStyles}) => {
         <div>add property</div>
         </NavLink>
 
-         <NavLink to={"/userprofile"} className={({isActive}) =>isActive ? "active-link flexCenter gap-x-1 rounded-full px-2 py-1 cursor-pointer" : "flexCenter gap-x-1 rounded-full px-2 py-1 cursor-pointer"}>
+         <NavLink to={"/filters"} className={({isActive}) =>isActive ? "active-link flexCenter gap-x-1 rounded-full px-2 py-1 cursor-pointer" : "flexCenter gap-x-1 rounded-full px-2 py-1 cursor-pointer"}>
         <MdAddHome />
-        <div> Profile</div>
+        <div>Filters</div>
         </NavLink>
 
     </nav>

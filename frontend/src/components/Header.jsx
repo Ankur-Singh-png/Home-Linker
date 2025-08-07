@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Navbar from './Navbar'
 import { MdClose, MdMenu } from 'react-icons/md'
-import userIcon from "../assets/user.svg"
 import { GiHamburgerMenu } from "react-icons/gi";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 import Sidebar from './Sidebar/Sidebar';
 
 const Header = () => {
@@ -12,6 +12,8 @@ const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false)
   const toggleMenu = () => setMenuOpened(!menuOpened)
   const [ showNav, setShowNav ] = useState(false);
+
+  const navigate = useNavigate();
 
 
   useEffect(()=> {
@@ -56,8 +58,8 @@ const Header = () => {
             <div className='flexBetween gap-x-3 sm:gap-x-5 bold-16'>
               <Link to="/login">
               <button className='btn-secondary flexCenter gap-x-2 medium-16 rounded-full'>
-                <img src={userIcon} alt="" height={21} width={22} />
-                <span>Login</span>
+                <RiLogoutBoxRLine style={{fontSize: '19px'}}/>
+                <span>Logout</span>
               </button>
               </Link>
 
