@@ -42,6 +42,11 @@ const Sidebar = ({ showNav, setShowNav }) => {
             My Properties
           </NavLink>
         </li>
+         <li>
+          <NavLink to="/filters" >
+             Filters
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

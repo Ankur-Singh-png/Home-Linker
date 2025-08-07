@@ -1,0 +1,71 @@
+.property-container {
+  padding: 100px 30px 30px 30px; /* space for fixed navbar */
+  max-width: 1200px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f8fa;
+}
+
+/* Sorting section */
+.filters.sorting {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+/* Grid layout for filter dropdowns */
+.filters.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.filters select,
+.filters button {
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+}
+
+.filters button:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.property-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px;
+}
+
+.property-card {
+  background-color: #fff;
+  padding: 18px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease-in-out;
+  border-left: 5px solid #007bff;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+}
+
+.property-card p {
+  margin: 5px 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.property-card strong {
+  color: #222;
+}
