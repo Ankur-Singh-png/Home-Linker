@@ -90,4 +90,14 @@ public class PropertyController {
     public ResponseEntity<?> getProperty(@PathVariable Long id){
     	return ResponseEntity.ok(propertyService.findPropertyById(id));
     }
+
+	@DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteProperty(@PathVariable Long id){
+    	return ResponseEntity.ok(propertyService.deletePropertyById(id));
+    }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateProperty(@PathVariable Long id , @RequestBody PropertyDto dto){
+    	return ResponseEntity.ok(propertyService.updatePropertyById(id , dto));
+    }
 }
