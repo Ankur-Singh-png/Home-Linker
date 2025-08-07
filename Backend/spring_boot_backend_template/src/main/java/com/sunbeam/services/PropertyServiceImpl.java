@@ -3,7 +3,6 @@ package com.sunbeam.services;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
@@ -14,14 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.sunbeam.custom_exceptions.ApiException;
-
 import com.sunbeam.dao.CategoryDao;
-
 import com.sunbeam.dao.PropertyDao;
 import com.sunbeam.dao.UserDao;
 import com.sunbeam.dto.PropertyDto;
 import com.sunbeam.dto.PropertyRequestDTO;
 import com.sunbeam.dto.PropertySummaryDTO;
+import com.sunbeam.dto.UpdatePropertyDTO;
 import com.sunbeam.entities.Category;
 import com.sunbeam.entities.Property;
 import com.sunbeam.entities.User;
@@ -141,6 +139,33 @@ public class PropertyServiceImpl implements PropertyService {
 		propertydao.save(property);
 
 		return "Property Updated Successfully";
+	}
+
+
+
+	
+	@Override
+	public PropertyDto findPropertyByIdAndOwnerId(Long userId, Long propertyId) {
+	    Property property = propertydao.findByIdAndOwnerId(propertyId, userId)
+	        .orElseThrow(() -> new ApiException("Property not found for the given user and id"));
+
+	    return mapper.map(property, PropertyDto.class);
+	}
+	
+
+	@Override
+	public String updatePropertyByUser(Long userId, Long propertyId, UpdatePropertyDTO dto) {
+	    //  Fetch property
+	    Property property = propertydao.findById(propertyId)
+	        .orElseThrow(() -> new ApiException("Property not found"));
+
+	    // Step 2: Validate owner
+	    if (!property.getOwner().getId().equals(userId)) {
+	        throw new ApiException("User not authorized to update this property");
+	    }
+	    mapper.map(dto, property);
+	    propertydao.save(property);
+	    return "Property updated successfully";
 	}
 
 }
