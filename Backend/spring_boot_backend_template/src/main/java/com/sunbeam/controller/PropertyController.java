@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/property")
 @AllArgsConstructor
+@CrossOrigin
 public class PropertyController {
 	private final PropertyService propertyService;
 		
@@ -48,4 +50,39 @@ public class PropertyController {
         return ResponseEntity.ok(properties);
     }
 
+
+	@GetMapping("/LowToHigh")
+	public ResponseEntity<?> getProperties(){
+		return ResponseEntity.ok(propertyService.findAllByOrderByPriceAsc());
+	}
+	
+    @GetMapping("HighToLow")
+    public ResponseEntity<?> getAllPropertiesSortedByPriceInDesc(){
+    	return ResponseEntity.ok(propertyService.findAllByOrderByPriceDesc());
+    }
+    
+    @GetMapping("SortByDate")
+    public ResponseEntity<?> getAllPropertiesSortedByDate(){
+    	return ResponseEntity.ok(propertyService.findAllByOrderByDate());
+    }
+    
+    @GetMapping("/state/{state}")
+    public ResponseEntity<?> getAllPropertiesByState(@PathVariable String state){
+    	return ResponseEntity.ok(propertyService.findAllPropertiesByState(state));
+    }
+    
+    @GetMapping("/city/{city}")
+    public ResponseEntity<?> getAllPropertiesByCity(@PathVariable String city){
+    	return ResponseEntity.ok(propertyService.findAllPropertiesByCity(city));
+    }
+    
+    @GetMapping("/bedrooms/{bedrooms}")
+      public ResponseEntity<?> getAllPropertiesByBedrooms(@PathVariable int bedrooms){
+    	return ResponseEntity.ok(propertyService.findAllPropertiesByBedrooms(bedrooms));
+    } 
+    
+    @GetMapping("/isAvailable/{available}")
+    public ResponseEntity<?> getAllPropertiesByAvailability(@PathVariable boolean available){
+    	return ResponseEntity.ok(propertyService.findAllPropertiesByAvailability(available));
+    } 
 }

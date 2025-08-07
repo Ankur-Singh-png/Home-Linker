@@ -14,6 +14,7 @@ import Registration from './pages/Registration';
 import MyProperties from "./pages/myproperties/MyProperties";
 import { useEffect } from "react";
 import { ToastContainer } from 'react-toastify'
+import PropertyFilter from './pages/PropertyFilter';
 
 function AppContent() {
   const location = useLocation();
@@ -45,6 +46,7 @@ function AppContent() {
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/updateprofile/:id" element={<UpdateProfile/>}/>
             <Route path="/contactus" element={<ContactUs />} />
+            <Route path="/filters" element={<PropertyFilter/>}/>
             {/* <Route path="/wishlist" element={< />}/>
             <Route path="/mybooking" element={< />}/>
             <Route path="/myproperties" element={< />}/> */}

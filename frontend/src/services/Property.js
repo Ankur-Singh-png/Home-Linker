@@ -19,6 +19,7 @@ export async function registerProperty(formDataToSubmit) {
 
 export const fetchPropertiesByUserId = async (userId, token) => {
   try {
+    const token = sessionStorage.getItem('token');
     const response = await axios.get(`${BASE_URL}/myproperties/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
