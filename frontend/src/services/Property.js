@@ -31,3 +31,38 @@ export const fetchPropertiesByUserId = async (userId, token) => {
     throw error;
   }
 };
+
+
+export const getAllCategories = async () => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const url = `http://localhost:8080/category/getAllCategories`;
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    throw error;
+  }
+}
+
+export const getAllPropertiesByDate = async () => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const url = `http://localhost:8080/property/SortByDate`;
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log("response from getAllPropertiesByDate: ", response);
+    return response;
+  } catch (error) {
+    console.error('Error fetching properties:', error);
+    throw error;
+  } 
+
+} 

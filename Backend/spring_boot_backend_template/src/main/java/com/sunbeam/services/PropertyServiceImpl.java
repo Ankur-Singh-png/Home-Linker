@@ -13,10 +13,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.sunbeam.custom_exceptions.ApiException;
+import com.sunbeam.dao.CategoryDao;
 import com.sunbeam.dao.PropertyDao;
+import com.sunbeam.dao.UserDao;
 import com.sunbeam.dto.PropertyDto;
+import com.sunbeam.dto.PropertyRequestDTO;
 import com.sunbeam.dto.PropertySummaryDTO;
+import com.sunbeam.entities.Category;
 import com.sunbeam.entities.Property;
+import com.sunbeam.entities.User;
 
 import lombok.AllArgsConstructor;
 
@@ -26,11 +32,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PropertyServiceImpl implements PropertyService{
 	private final PropertyDao propertydao;
+	private final UserDao userdao;
+	private final CategoryDao categorydao;
 	private final Cloudinary cloudinary;
 	private final ModelMapper mapper;
 
 	@Override
-	public boolean addProperty(Property property, MultipartFile imageFile) throws IOException {
+	public boolean addProperty(PropertyRequestDTO property, MultipartFile imageFile) throws IOException {
 	    if (imageFile != null && !imageFile.isEmpty()) {
 	    	System.out.println("in service layer method");
 	    	@SuppressWarnings("unchecked")
@@ -43,10 +51,16 @@ public class PropertyServiceImpl implements PropertyService{
 	        property.setImageURL(imageUrl);
 	   
 	    }
+	    
+	    Property propertyObj = mapper.map(property, Property.class);
+	    User user = userdao.findById(property.getOwnerId()).orElseThrow(() -> new ApiException("user not found"));
+	    propertyObj.setOwner(user);
+	    Category category = categorydao.findById(property.getCategoryId()).orElseThrow(() -> new ApiException("category not found"));
+	    propertyObj.setCategory(category);
 
 
-	    Property savedProperty = propertydao.save(property);
-	    return true;
+	    Property savedProperty = propertydao.save(propertyObj);
+	    return savedProperty.getId() != null;
 	}
 
 

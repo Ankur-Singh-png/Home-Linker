@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AddProperty.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom"; 
 import { registerProperty } from "../services/Property";
+import { getAllCategories } from './../services/Property';
 
 const AddProperty = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ const AddProperty = () => {
     wifi: false,
     parking: false,
     furnished: false,
-    ownerId: "Jhon Smith",
+    ownerId: sessionStorage.getItem("userId"),
     categoryId:"",
   });
 
@@ -33,6 +34,21 @@ const AddProperty = () => {
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
   
+  const [categories, setCategories] = useState([]);
+
+useEffect(() => {
+  const fetchCategories = async () => {
+    try {
+      const res = await getAllCategories();
+      console.log("Categories fetched:", res);
+      setCategories(res.data);
+    } catch (err) {
+      console.error("Failed to fetch categories", err);
+    }
+  };
+
+  fetchCategories();
+}, []);
 
   
   const handleInputChange = (e) => {
@@ -54,9 +70,20 @@ const AddProperty = () => {
   };
 
  
-  const handleFileChange = (e) => {
-  setImage(e.target.files[0]);
+const handleDropDownChange = (e) => {
+  const selectedId = e.target.value;
+  setFormData((prev) => ({
+    ...prev,
+    categoryId: selectedId
+  }));
+  console.log("Selected category ID:", selectedId);
 };
+
+const handleFileChange = (e) => {
+  const file = e.target.files[0]; 
+    setImage(file);
+
+};   
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -106,7 +133,7 @@ const AddProperty = () => {
   return (
     <div className="property-container">
       <h2 className="heading">Add Property for Sale</h2>
-      <div className="form">
+      <div className="form-container">
         <div className="form-group">
           <label>Title:</label>
           <input type="text" name="title" value={formData.title} onChange={handleInputChange} required />
@@ -149,17 +176,14 @@ const AddProperty = () => {
 
         <div className="form-group">
           <label>Category:</label>
-          <select name="categoryId" value={formData.categoryId} onChange={handleInputChange}>
-            <option value="">Select Category</option>
-            <option value="1">Residential</option>
-            <option value="2">Commercial</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>Owner:</label>
-          <input type="text" name="ownerId" value={formData.ownerId} onChange={handleInputChange} readOnly>
-          </input>
+          <select value={formData.categoryId} onChange={handleDropDownChange}>
+            <option value="">-- Select --</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.title}
+              </option>
+            ))}
+      </select>
         </div>
 
         <div className="form-group">

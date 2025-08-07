@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.sunbeam.dto.AuthRequest;
+import com.sunbeam.dto.TokenDTO;
 import com.sunbeam.dto.UserDTO;
 import com.sunbeam.jwt.JwtUtil;
 import com.sunbeam.services.UserService;
@@ -52,7 +53,12 @@ public class UserController {
         System.out.println("Creating token");
 		String token = jwtUtil.createToken(auth);
 		System.out.println("Token created");
-		return ResponseEntity.ok(token);
+		
+		UserDTO u = userService.getUserDTOByEmail(authDTO.getEmail());
+		TokenDTO dto = new TokenDTO();
+		dto.setId(u.getId());
+		dto.setToken(token);
+		return ResponseEntity.ok(dto);
 	}
 	
 

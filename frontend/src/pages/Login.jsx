@@ -25,8 +25,8 @@ function Login() {
       console.log('Login result:', result);
       if (result.status === 200) {
         toast.success('Welcome to Home Linker')
-       sessionStorage.setItem('token', result.data);
-       //console.log(sessionStorage.getItem('token'))
+       sessionStorage.setItem('token', result.data.token);
+       sessionStorage.setItem('userId', result.data.id);
         navigate('/home')
       } else {
         toast.error("Login failed. Please try again");

@@ -29,7 +29,7 @@ public class PropertyController {
 	private final PropertyService propertyService;
 		
 	@PostMapping("/addproperty")
-	public ResponseEntity<?> addProperty (@RequestPart Property property , @RequestParam MultipartFile imageFile){
+	public ResponseEntity<?> addProperty (@RequestPart PropertyRequestDTO property , @RequestParam MultipartFile imageFile){
 		System.out.println("In controller");
 		System.out.println(property);
 		System.out.println(imageFile.getOriginalFilename());

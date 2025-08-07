@@ -7,10 +7,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sunbeam.entities.Property;
 import com.sunbeam.dto.PropertyDto;
+import com.sunbeam.dto.PropertyRequestDTO;
 import com.sunbeam.dto.PropertySummaryDTO;
 
 public interface PropertyService {
-	boolean addProperty(Property property , MultipartFile imageFile) throws IOException;
+	boolean addProperty(PropertyRequestDTO property , MultipartFile imageFile) throws IOException;
 	List<PropertySummaryDTO> getPropertiesByUserId(Long userId);
 	 List<PropertyDto> findAllByOrderByPriceAsc();
 	   

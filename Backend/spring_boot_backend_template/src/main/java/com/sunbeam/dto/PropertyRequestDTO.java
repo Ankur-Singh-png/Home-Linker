@@ -1,16 +1,22 @@
 package com.sunbeam.dto;
 
 import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-public class PropertyDto {
+@NoArgsConstructor
+@ToString
+public class PropertyRequestDTO {
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 	@NotBlank(message="Title cannot be Empty")
@@ -51,7 +57,10 @@ public class PropertyDto {
 	private boolean parking;
 	@NotNull(message = "Value must not be null")
 	private boolean furnised;
+	private Long ownerId;
+	private Long categoryId;
+	private String imageURL;
 	@NotBlank(message="Date should not be null")
 	private LocalDate creationDate;
-	private String imageURL;;
+
 }
