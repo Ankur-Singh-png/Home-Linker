@@ -25,7 +25,6 @@ const ViewDetails = () => {
   }, [propertyId]);
 
   const formatBoolean = (value) => (value ? 'Yes' : 'No');
-
 return (
   details && (
     <div className="min-h-screen bg-gray-100 py-8 px-4 md:px-12">
@@ -86,6 +85,16 @@ return (
               {details.parking && <li>🅿️ Parking</li>}
               {details.furnised && <li>🛋️ Furnished</li>}
             </ul>
+          </div>
+
+          {/* Buttons */}
+          <div className="pt-6 flex gap-4">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md transition">
+              📅 Book Now
+            </button>
+            <button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded-lg shadow-md transition">
+              ❤️ Add to Wishlist
+            </button>
           </div>
         </div>
       </div>
