@@ -6,7 +6,7 @@ import Bookings from "./pages/Bookings";
 import Favourites from "./pages/Favourites";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import UserProfile from "./components/UserProfile";
+import UserProfile from "./pages/Profile/UserProfile";
 import UpdateProfile from "./pages/Profile/UpdateProfile";
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
