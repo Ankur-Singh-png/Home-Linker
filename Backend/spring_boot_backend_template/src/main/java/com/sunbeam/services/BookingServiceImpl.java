@@ -1,5 +1,6 @@
 package com.sunbeam.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ import com.sunbeam.dao.UserDao;
 import com.sunbeam.entities.Booking;
 import com.sunbeam.entities.Property;
 import com.sunbeam.entities.User;
-import com.sunbeam.entities.WishList;
 
 import lombok.AllArgsConstructor;
 
@@ -48,6 +48,15 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public List<Booking> getBookingByUser(Long userId) {
 		return bookingDao.findByUserId(userId);
+	}
+	
+	@Override
+	public void updateBookingDate(Long userId, Long propertyId, LocalDate newDate) {
+	    Booking b = bookingDao.findByUserIdAndPropertyId(userId, propertyId)
+	        .orElseThrow(() -> new ApiException("Booking not found"));
+	    
+	    b.setBookedAt(newDate); // manually override bookedAt
+	    bookingDao.save(b);
 	}
 
 }
