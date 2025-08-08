@@ -62,7 +62,7 @@ public class JwtUtil {
 							.parseSignedClaims(token)
 							.getPayload();
 		String userEmail = claims.getSubject();
-		String roles = (String) claims.get("userRole");
+		String roles = (String) claims.get("role");
 		List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
 		Authentication auth = new UsernamePasswordAuthenticationToken(userEmail, null, authorities);
 		return auth;

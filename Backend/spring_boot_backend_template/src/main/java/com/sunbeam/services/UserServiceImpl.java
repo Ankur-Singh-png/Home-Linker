@@ -1,5 +1,7 @@
 package com.sunbeam.services;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -78,6 +80,12 @@ public class UserServiceImpl implements UserService , UserDetailsService{
 	public UserDTO getUserDTOByEmail(String email) {
 		User u = userDao.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("No user exists!"));
 		return mapper.map(u, UserDTO.class);
+	}
+
+	@Override
+	public List<UserDTO> getAllUsers() {
+		List<User> users = userDao.findAll();
+		return users.stream().map(user -> mapper.map(user, UserDTO.class)).toList();
 	}
 
 }

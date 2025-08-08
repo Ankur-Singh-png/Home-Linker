@@ -17,6 +17,8 @@ import UpdateProperty from "./pages/myproperties/UpdateProperty";
 import { useEffect } from "react";
 import { ToastContainer } from 'react-toastify'
 import PropertyFilter from './pages/PropertyFilter';
+import Admin from './pages/Admin';
+
 
 function AppContent() {
   const location = useLocation();
@@ -39,6 +41,7 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/home" element={<Home />} />
             <Route path="/listing" element={<Listing />} />

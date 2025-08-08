@@ -1,151 +1,61 @@
-import React, { useState } from 'react'
-
-
-import "./Admin.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function Admin() {
-    
-//  const[users,setUsers]=useState[null];
+  const [users, setUsers] = useState([]);
 
- const users= [
-    { 
-    name:"Gaurav Dhyani",
-    email:"gaurav@gmail.com",
-     phone: "+91-9876543210",
-     Properties: [
-    {
-     Id: 1,
-     name: "2BHK Flat, Delhi",
-     date: "2020-04-21",
-     status: "Pending",
-    },
-    {
-     Id: 2,
-     name: "3BHK Flat, Mumbai",
-     date: "2021-04-21",
-     status: "Completed",
-    }
-    ]
- },
- {
-    name:"Yash Agarwal",
-    email:"yash@gmail.com",
-     phone: "+91-9876543210",
-     Properties: [
-    {
-     Id: 3,
-     name: "5BHK Flat, Delhi",
-     date: "2020-04-21",
-     status: "Pending",
-    },
-    {
-     Id: 4,
-     name: "4BHK Flat, Mumbai",
-     date: "2021-04-21",
-     status: "Completed",
-    }
-    ]
- },
- {
-    name:"Ankur ",
-    email:"ankur@gmail.com",
-     phone: "+91-9876543210",
-     Properties: [
-    {
-     Id: 5,
-     name: "2BHK Flat, Delhi",
-     date: "2020-04-21",
-     status: "Pending",
-    },
-    {
-     Id: 6,
-     name: "3BHK Flat, Mumbai",
-     date: "2021-04-21",
-     status: "Completed",
-    }
-    ]
- },
- {
-    name:"Sreyas Hedau ",
-    email:"sreyas@gmail.com",
-     phone: "+91-9876543210",
-     Properties: [
-    {
-     Id: 7,
-     name: "2BHK Flat, Delhi",
-     date: "2020-04-21",
-     status: "Pending",
-    },
-    {
-     Id: 8,
-     name: "3BHK Flat, Mumbai",
-     date: "2021-04-21",
-     status: "Completed",
-    }
-    ]
- },
- {
-    name:"Chetan ",
-    email:"chetan@gmail.com",
-    phone: "+91-9876543210",
-     Properties: [
-    {
-     Id: 9,
-     name: "2BHK Flat, Delhi",
-     date: "2020-04-21",
-     status: "Pending",
-    },
-    {
-     Id: 10,
-     name: "3BHK Flat, Mumbai",
-     date: "2021-04-21",
-     status: "Completed",
-    }
-    ]
- }
-]
- 
-//   useEffect(() => {
-//     axios
-//       .get(`http://localhost:8080/api/users`)
-//       .then((response) => {
-//         setUser(response.data);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching user data:", error);
-//       });
-//   }, []);
-
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        const token = sessionStorage.getItem('token');
+        const url = `http://localhost:8080/admin/dashboard`;
+        const res = await axios.get(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUsers(res.data);
+      } catch (err) {
+        console.error("Failed to fetch users", err);
+        toast.error("Failed to fetch user details");
+      }
+    };
+    getAllUsers();
+  }, []);
 
   return (
-    <div className='container'>
-      <h1 className='h'><b>All User Details</b></h1>
-      <div>
-      <table>
-        <thead>
+    <div className="p-6 bg-white-50 min-h-screen">
+      <h1 className="text-2xl font-bold text-center mb-8" style={{ color: '#8AC243' }}>
+        All User Details
+      </h1>
+      <div className="overflow-x-auto mx-auto max-w-6xl">
+        <table className="min-w-full border border-gray-200 bg-white shadow-lg rounded-lg">
+          <thead style={{ backgroundColor: '#8AC243' }} className="text-white">
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Properties</th>
+              <th className="py-3 px-4 text-left font-semibold" >ID</th>
+              <th className="py-3 px-4 text-left font-semibold">Name</th>
+              <th className="py-3 px-4 text-left font-semibold">Email</th>
+              <th className="py-3 px-4 text-left font-semibold">Phone</th>
+              <th className="py-3 px-4 text-left font-semibold">Date of Birth</th>
             </tr>
-        </thead>
-        <tbody>
-           {users.map((u) =>
-           u.Properties.map((p) => (
-            <tr>
-              <td>{u.name}</td>
-              <td>{u.email}</td>
-              <td>{u.phone}</td>
-              <td>{p.name}</td>
-            </tr>
-          ))
-        )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((u, index) => (
+              <tr style={{ backgroundColor: '#8AC243' }}
+                key={u.id}
+                className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"} hover:bg-green-50 transition`}
+              >
+                <td className="py-3 px-4 text-gray-800">{u.id}</td>
+                <td className="py-3 px-4 text-gray-800">{u.firstName} {u.lastName}</td>
+                <td className="py-3 px-4 text-gray-600">{u.email}</td>
+                <td className="py-3 px-4 text-gray-600">{u.phoneNumber}</td>
+                <td className="py-3 px-4 text-gray-600">{u.dob}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default Admin
+export default Admin;
