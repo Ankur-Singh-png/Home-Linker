@@ -19,6 +19,7 @@ public class PropertySummaryDTO
     private String state;
     private double price;
     private boolean isAvailable;
+    private String imageURL;
 
 
 }
