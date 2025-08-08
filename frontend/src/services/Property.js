@@ -69,8 +69,6 @@ export const getAllPropertiesByDate = async () => {
 
 export const addtowishlist = async (propertyId) => {
   try {
-    const token = sessionStorage.getItem('token');    
-    const userId = sessionStorage.getItem('userId');
     const response = await axios.post(
       `http://localhost:8080/wishlist/${propertyId}`,
       {}, 
@@ -89,8 +87,6 @@ export const addtowishlist = async (propertyId) => {
 
 export const addtoBooking = async (propertyId) => {
   try {
-    const token = sessionStorage.getItem('token');    
-    const userId = sessionStorage.getItem('userId');
     const response = await axios.post(
       `http://localhost:8080/booking/${propertyId}`,
       {}, 

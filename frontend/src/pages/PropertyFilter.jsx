@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./PropertyFilter.css";
+import Item from "../components/Item"; // Assuming you have an Item component to display each property
 
 const PropertyFilter = () => {
   const [properties, setProperties] = useState([]);
@@ -88,14 +89,7 @@ const PropertyFilter = () => {
       <div className="property-list">
         {properties.length > 0 ? (
           properties.map((prop, index) => (
-            <div key={index} className="property-card">
-              <p><strong>Title:</strong> {prop.title}</p>
-              <p><strong>Price:</strong> ₹{prop.price}</p>
-              <p><strong>State:</strong> {prop.state}</p>
-              <p><strong>City:</strong> {prop.city}</p>
-              <p><strong>Bedrooms:</strong> {prop.bedrooms}</p>
-              <p><strong>Available:</strong> {prop.isAvailable ? "Yes" : "No"}</p>
-            </div>
+            <Item key={index} property={prop}/> 
           ))
         ) : (
           <p>No properties found.</p>
