@@ -165,3 +165,48 @@ export const deleteProperty = async (propertyId) => {
     throw error;
   }
 };
+
+
+
+
+
+export const getUserBookings = async () => {
+  try {
+    const token = sessionStorage.getItem("token");
+    const response = await axios.get(`http://localhost:8080/booking`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    throw error;
+  }
+};
+
+export const deleteBooking = async (propertyId) => {
+  try {
+    const token = sessionStorage.getItem("token");
+    const response = await axios.delete(`http://localhost:8080/booking/${propertyId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+    throw error;
+  }
+};
+
+export const updateBooking = async (propertyId, newDate) => {
+  try {
+    const token = sessionStorage.getItem("token");
+    const response = await axios.put(`http://localhost:8080/booking/${propertyId}/${newDate}`, {}, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating booking:", error);
+    throw error;
+  }
+};

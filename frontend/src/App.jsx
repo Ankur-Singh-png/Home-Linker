@@ -46,7 +46,7 @@ function AppContent() {
             <Route path="/home" element={<Home />} />
             <Route path="/listing" element={<Listing />} />
             <Route path="/addproperty" element={<AddProperty />} />
-            <Route path="/booking" element={<Bookings />} />
+            <Route path="/mybooking" element={<Bookings />} />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/updateprofile/:id" element={<UpdateProfile/>}/>
