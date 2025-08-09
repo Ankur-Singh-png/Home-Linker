@@ -27,7 +27,7 @@ export const PROPERTIES = [
     country: "Italy",
     city: "Florence",
     area: 450,
-    price: 450,
+    price: 45000000,
     description: "Charming bungalow with modern amenities and scenic views, perfect for peaceful living.",
     facilities: {
       bedrooms: 3,
@@ -43,7 +43,7 @@ export const PROPERTIES = [
     country: "Australia",
     city: "Sydney",
     area: 500,
-    price: 600,
+    price: 60000000,
     description: "A beautiful residence with a stunning ocean view, perfect for a serene escape.",
     facilities: {
       bedrooms: 4,
@@ -59,7 +59,7 @@ export const PROPERTIES = [
     country: "Japan",
     city: "Kyoto",
     area: 420,
-    price: 480,
+    price: 48000000,
     description: "A peaceful retreat with modern amenities and beautiful sunrise views.",
     facilities: {
       bedrooms: 2,
@@ -75,7 +75,7 @@ export const PROPERTIES = [
     country: "Canada",
     city: "Toronto",
     area: 550,
-    price: 800,
+    price: 80000000,
     description: "An elegant urban property with sophisticated design and ample space.",
     facilities: {
       bedrooms: 5,
@@ -91,7 +91,7 @@ export const PROPERTIES = [
     country: "Spain",
     city: "Barcelona",
     area: 470,
-    price: 700,
+    price: 70000000,
     description: "A charming rustic villa with modern amenities and scenic views.",
     facilities: {
       bedrooms: 3,
@@ -107,7 +107,7 @@ export const PROPERTIES = [
     country: "Brazil",
     city: "Rio de Janeiro",
     area: 520,
-    price: 680,
+    price: 68000000,
     description: "A luxurious penthouse with a garden grove and breathtaking views.",
     facilities: {
       bedrooms: 4,
@@ -123,7 +123,7 @@ export const PROPERTIES = [
     country: "Switzerland",
     city: "Zurich",
     area: 480,
-    price: 750,
+    price: 75000000,
     description: "A tranquil home with majestic mountain views and modern amenities.",
     facilities: {
       bedrooms: 3,
@@ -139,7 +139,7 @@ export const PROPERTIES = [
     country: "South Africa",
     city: "Cape Town",
     area: 430,
-    price: 500,
+    price: 50000000,
     description: "A cozy lakefront apartment with scenic views and modern amenities.",
     facilities: {
       bedrooms: 2,
@@ -155,7 +155,7 @@ export const PROPERTIES = [
     country: "Thailand",
     city: "Bangkok",
     area: 460,
-    price: 520,
+    price: 52000000,
     description: "A serene villa with blissful surroundings and modern amenities.",
     facilities: {
       bedrooms: 3,

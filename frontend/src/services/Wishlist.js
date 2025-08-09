@@ -1,11 +1,9 @@
 import axios from "axios";
-const API_BASE = "http://localhost:8080";
-
 export async function fetchWishlist() {
   const token = sessionStorage.getItem('token');
-  const res = await axios.get(${API_BASE}/wishlist/getList, {
+  const res = await axios.get(`http://localhost:8080/wishlist/getList`, {
     headers: {
-      Authorization : Bearer ${token},
+      Authorization : `Bearer ${token}`,
     },
   });
   console.log("Wishlist response:", res);
@@ -15,10 +13,9 @@ export async function fetchWishlist() {
 
 export async function removeFromWishlist(propertyId) {
   const token = sessionStorage.getItem('token');
-  const res = await fetch(${API_BASE}/wishlist/${propertyId}, {
-    method: "DELETE",
+  const res = await axios.delete(`http://localhost:8080//wishlist/${propertyId}`, {
     headers: {
-      Authorization : Bearer ${token},
+      Authorization : `Bearer ${token}`,
     },
   });
   if (!res.ok) throw new Error("Failed to remove from wishlist");

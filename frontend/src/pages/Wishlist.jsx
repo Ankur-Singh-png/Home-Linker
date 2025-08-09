@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchWishlist, removeFromWishlist } from '../services/Wishlist';
+import { fetchWishlist } from '../services/Wishlist';
 import './Wishlist.css';
 import Item from '../components/Item';
 
@@ -8,13 +8,13 @@ const Wishlist = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const token = sessionStorage.getItem("token");
+
 
   useEffect(() => {
     const loadWishlist = async () => {
       setLoading(true);
       try {
-        if (!token) throw new Error("Unauthorized. Please log in.");
+       
         const data = await fetchWishlist();
         console.log("Fetched wishlist data:", data);
         setProperties(data);
@@ -28,15 +28,7 @@ const Wishlist = () => {
     loadWishlist();
   }, []);
 
-  // Remove handler
-  const handleRemove = async (id) => {
-    try {
-      await removeFromWishlist(id, token);
-      setProperties((prev) => prev.filter((item) => item.id !== id));
-    } catch (err) {
-      setError("Unable to remove from wishlist.");
-    }
-  };
+
 
   return (
     <div className="wishlist-page-container">
