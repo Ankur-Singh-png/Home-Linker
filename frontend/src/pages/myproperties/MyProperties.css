@@ -111,5 +111,9 @@
   object-fit: cover; /* Maintain aspect ratio and cover */
   display: block;
   margin-bottom: 0.5rem;
+   width: 100%;
+  height: 200px; /* fixed height for all images */
+  object-fit: cover; /* crop without stretching */
+  border-radius: 8px; /* match your card style */
 }
 

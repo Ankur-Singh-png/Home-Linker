@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { ToastContainer } from 'react-toastify'
 import PropertyFilter from './pages/PropertyFilter';
 import Admin from './pages/Admin';
+import Wishlist from './pages/Wishlist';
 
 
 function AppContent() {
@@ -53,6 +54,7 @@ function AppContent() {
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/filters" element={<PropertyFilter/>}/>
             <Route path="/myproperties/:userId" element={<MyProperties/>} />
+            <Route path="//wishlist" element={<Wishlist />} />
             <Route path="/details/:propertyId" element={<ViewDetails/>} />
             <Route path="/updateproperties/:userId/:propertyId" element={<UpdateProperty/>} />
           </Routes>

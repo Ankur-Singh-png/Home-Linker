@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sunbeam.custom_exceptions.ApiException;
 import com.sunbeam.dao.UserDao;
 import com.sunbeam.dto.PropertyDto;
+import com.sunbeam.dto.UserBookingDto;
 import com.sunbeam.entities.WishList;
 import com.sunbeam.services.WishListService;
 
@@ -50,14 +51,20 @@ public class WishListController {
         return ResponseEntity.ok("Removed from wishlist");
     }
 
-    @GetMapping
-    public ResponseEntity<List<PropertyDto>> getWishlist(Authentication authentication) {
+    @GetMapping("/getList")
+    public ResponseEntity<List<UserBookingDto>> getWishlist(Authentication authentication) {
+    	System.out.println("In controller");
         Long userId = getCurrentUserId(authentication);
-        List<WishList> list = wishListService.getWishlistByUser(userId);
-       
-       List<PropertyDto> dto =list.stream().map(property-> modelMapper.map(property, PropertyDto.class)).toList();
+        List<WishList> list = wishListService.getWishlistByUser(userId); 
         
-        return ResponseEntity.ok(dto);
+        List<UserBookingDto> dtoList = list.stream().map(wishlist -> {
+            UserBookingDto dto = modelMapper.map(wishlist.getProperty(), UserBookingDto.class);
+            dto.setBookedAt(wishlist.getAddedAt()); // set bookedAt from Booking entity
+            dto.setCategoryTitle(wishlist.getProperty().getCategory().getTitle());
+            dto.setPropertyId(wishlist.getProperty().getId());
+            return dto;
+        }).toList();
+        return ResponseEntity.ok(dtoList);
     }
     
 }

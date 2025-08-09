@@ -29,7 +29,7 @@ const Sidebar = ({ showNav, setShowNav }) => {
         </li>
         <li>
           <NavLink to="/wishlist">
-            Wishlist
+            My Wishlist
           </NavLink>
         </li>
         <li>
