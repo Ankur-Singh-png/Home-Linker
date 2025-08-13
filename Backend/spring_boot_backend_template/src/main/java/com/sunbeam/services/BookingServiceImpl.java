@@ -42,6 +42,8 @@ public class BookingServiceImpl implements BookingService {
 		Booking b = bookingDao.findByUserIdAndPropertyId(userId, propertyId)
 	            .orElseThrow(() -> new ApiException("Not in Booking"));
 		bookingDao.delete(b);
+		Property property = propertyDao.findById(propertyId).orElseThrow(() -> new ApiException("Property not found"));
+	    property.setAvailable(true);
 		return true;
 		
 	}

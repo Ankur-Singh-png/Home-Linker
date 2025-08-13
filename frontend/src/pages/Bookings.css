@@ -79,3 +79,14 @@ input[type="date"]:focus {
   border-color: #28a745;
   box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
 }
+
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: white;
+  background: rgb(44, 110, 183);
+  border: 1px solid #0449a3;
+  border-radius: 10px;
+}

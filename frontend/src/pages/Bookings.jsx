@@ -59,7 +59,7 @@ const Bookings = () => {
     <div className="min-h-screen bg-gray-100 py-8 px-4 md:px-12">
       
 
-      <h2 className="text-3xl font-semibold text-gray-800 mb-6">📅 My Bookings</h2>
+      <h2 className="page-title">📅 My Bookings</h2>
 
       {bookings.length === 0 ? (
         <p className="text-gray-600">You haven't booked any properties yet.</p>
