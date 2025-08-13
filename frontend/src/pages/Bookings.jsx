@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
 import { getUserBookings, deleteBooking, updateBooking } from '../services/Property';
 import './Bookings.css';
@@ -8,7 +8,7 @@ const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [updatingId, setUpdatingId] = useState(null);
   const [selectedDate, setSelectedDate] = useState('');
-  const navigate = useNavigate();
+
 
   const fetchBookings = async () => {
     try {
