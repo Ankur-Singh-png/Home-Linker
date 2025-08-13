@@ -76,7 +76,7 @@ export const getAllAvailableProperties = async () => {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log("response from getAllPropertiesByDate: ", response);
+    console.log("response from getAllPropertiesByAvailable: ", response);
     return response;
   } catch (error) {
     console.error('Error fetching properties:', error);

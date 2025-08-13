@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sunbeam.dto.AuthRequest;
 import com.sunbeam.dto.TokenDTO;
 import com.sunbeam.dto.UserDTO;
+import com.sunbeam.entities.User;
 import com.sunbeam.jwt.JwtUtil;
 import com.sunbeam.services.UserService;
 
@@ -72,5 +73,11 @@ public class UserController {
 	       userService.updateUserFromDTO(id, updateDTO);
 	       return ResponseEntity.ok("User updated successfully");
 	 }
+	
+	@GetMapping("/getRole/{id}")
+	public ResponseEntity<?> getUserRole(@PathVariable Long id){
+		User u = userService.findById(id);
+		return ResponseEntity.ok(u.getUserRole());
+	}
 
 }

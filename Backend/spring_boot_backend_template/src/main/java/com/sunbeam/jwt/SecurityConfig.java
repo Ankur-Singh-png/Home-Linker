@@ -40,7 +40,7 @@ public class SecurityConfig {
 				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 				.authorizeHttpRequests((request) -> request
 				             .requestMatchers("/user/signin", "/user/signup").permitAll()
-				             .requestMatchers("/admin/dashboard").hasRole("ADMIN")
+				             .requestMatchers("/admin/dashboard" , "/admin/getQuery").hasRole("ADMIN")
 				             .anyRequest().authenticated()
 				)
 				.httpBasic(basic -> basic.disable())

@@ -1,5 +1,6 @@
 package com.sunbeam.services;
 import com.sunbeam.dto.UserDTO;
+import com.sunbeam.entities.User;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ public interface UserService{
 	void updateUserFromDTO(Long id, UpdateUserDTO  dto);
 	UserDTO getUserDTOByEmail(String email);
 	List<UserDTO> getAllUsers();
+	User findById(Long id); 
 }

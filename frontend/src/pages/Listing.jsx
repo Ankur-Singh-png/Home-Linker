@@ -21,7 +21,7 @@ const Listing = () => {
     const token = sessionStorage.getItem('token');
       if(token === null)
         navigate("/login")
-    const fetchPropertiesByDate = async () => {
+    const fetchPropertiesByAvaliability = async () => {
       try {
         const res = await getAllAvailableProperties();
         setproperties(res.data);
@@ -31,7 +31,7 @@ const Listing = () => {
       }
     };
   
-    fetchPropertiesByDate();
+    fetchPropertiesByAvaliability();
   }, []);
 
  const handleSearch = async (e) => {

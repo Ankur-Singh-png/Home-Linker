@@ -88,4 +88,10 @@ public class UserServiceImpl implements UserService , UserDetailsService{
 		return users.stream().map(user -> mapper.map(user, UserDTO.class)).toList();
 	}
 
+	@Override
+	public User findById(Long id) {
+		// TODO Auto-generated method stub
+		return userDao.findById(id).orElseThrow(() -> new ApiException("invalid user id"));
+	}
+
 }

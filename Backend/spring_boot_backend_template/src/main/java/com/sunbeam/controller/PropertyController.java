@@ -131,6 +131,13 @@ public class PropertyController {
    public ResponseEntity<?> getAllProperties(){
 	   return ResponseEntity.ok(propertyService.getAllPropertiesAvailable());
    }
+   
+   @GetMapping("/search")
+   public ResponseEntity<?> searchProperties(@RequestParam String keyword){
+   	System.out.println("in controller");
+   	System.out.println(keyword);
+   	return ResponseEntity.ok(propertyService.SerachByKeyword(keyword));
+   }
 
    
 }
