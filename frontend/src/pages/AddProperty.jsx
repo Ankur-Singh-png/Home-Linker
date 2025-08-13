@@ -37,6 +37,9 @@ const AddProperty = () => {
   const [categories, setCategories] = useState([]);
 
 useEffect(() => {
+  const token = sessionStorage.getItem('token');
+  if(token === null)
+    navigate("/login")
   const fetchCategories = async () => {
     try {
       const res = await getAllCategories();

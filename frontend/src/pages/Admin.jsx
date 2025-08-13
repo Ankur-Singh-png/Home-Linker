@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function Admin() {
   const [users, setUsers] = useState([]);
   const [queries, setQueries] = useState([]);
+  const navigate = useNavigate();
 
   const getAllUsers = async () => {
     try {
@@ -36,6 +38,10 @@ function Admin() {
   };
 
   useEffect(() => {
+    const token = sessionStorage.getItem('token');
+      if(token === null)  
+        navigate("/login")
+    
     getAllUsers();
     getAllQueries();
   }, []);

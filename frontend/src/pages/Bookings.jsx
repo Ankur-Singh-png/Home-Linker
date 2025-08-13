@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { getUserBookings, deleteBooking, updateBooking } from '../services/Property';
 import './Bookings.css';
+import { useNavigate } from 'react-router-dom';
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [updatingId, setUpdatingId] = useState(null);
   const [selectedDate, setSelectedDate] = useState('');
+  const navigate = useNavigate();
 
 
   const fetchBookings = async () => {
@@ -20,6 +22,9 @@ const Bookings = () => {
   };
 
   useEffect(() => {
+    const token = sessionStorage.getItem('token');
+  if(token === null)
+    navigate("/login")
     fetchBookings();
   }, []);
 
