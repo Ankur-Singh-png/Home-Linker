@@ -11,13 +11,13 @@ export async function fetchWishlist() {
 }
 
 
+
 export async function removeFromWishlist(propertyId) {
   const token = sessionStorage.getItem('token');
-  const res = await axios.delete(`http://localhost:8080//wishlist/${propertyId}`, {
+  const res = await axios.delete(`http://localhost:8080/wishlist/${propertyId}`, {
     headers: {
-      Authorization : `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
-  if (!res.ok) throw new Error("Failed to remove from wishlist");
-  return res;
+  return res.data; 
 }

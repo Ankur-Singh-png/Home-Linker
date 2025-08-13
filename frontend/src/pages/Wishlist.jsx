@@ -1,54 +1,101 @@
 import React, { useEffect, useState } from 'react';
-import { fetchWishlist } from '../services/Wishlist';
+import { fetchWishlist, removeFromWishlist } from '../services/Wishlist';
 import './Wishlist.css';
-import Item from '../components/Item';
+import { toast } from 'react-toastify';
 
 const Wishlist = () => {
   const [properties, setProperties] = useState([]);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-
+  const loadWishlist = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchWishlist();
+      setProperties(data);
+      setError(null);
+    } catch (err) {
+      setError(err.message || 'Failed to fetch wishlist.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const loadWishlist = async () => {
-      setLoading(true);
-      try {
-       
-        const data = await fetchWishlist();
-        console.log("Fetched wishlist data:", data);
-        setProperties(data);
-        setError(null);
-      } catch (err) {
-        setError(err.message || "Failed to fetch wishlist.");
-      } finally {
-        setLoading(false);
-      }
-    };
     loadWishlist();
   }, []);
 
-
+  const handleDelete = async (propertyId) => {
+    if (window.confirm('Are you sure you want to remove this from your wishlist?')) {
+      try {
+        await removeFromWishlist(propertyId);
+        toast.success('Removed from wishlist');
+        loadWishlist();
+      } catch (err) {
+        toast.error('Failed to remove from wishlist');
+      }
+    }
+  };
 
   return (
-    <div className="wishlist-page-container">
-      <h1 className="page-title">📅 My Wishlist</h1>
+    <div className="min-h-screen bg-gray-100 py-8 px-4 md:px-12">
+      <h2 className="page-title">My Wishlist</h2>
 
-      {error && <p className="error-message">{error}</p>}
-
-      {loading && <p>Loading...</p>}
-
-      {!loading && properties.length === 0 && !error ? (
-        <p className="no-properties">Your wishlist is empty.</p>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p className="text-red-600">{error}</p>
+      ) : properties.length === 0 ? (
+        <p className="text-gray-600">Your wishlist is empty.</p>
       ) : (
-        <ul className="property-list">
-          {properties.map((property,index) => (
-            <Item key={index} property={property}/>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {properties.map((property) => (
+            <div key={property.propertyId} className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:translate-y-[-4px] hover:shadow-xl">
+              <img
+                src={property.imageURL}
+                alt={property.title}
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-6 space-y-4">
+                <h3 className="text-2xl font-semibold text-gray-800">{property.title}</h3>
+                <p className="text-gray-700">{property.categoryTitle}</p>
+                <p className="text-sm text-gray-600">
+                  <strong>Address:</strong> {property.address}, {property.city}, {property.state}, {property.country} - {property.pincode}
+                </p>
+
+                <div className="grid grid-cols-2 gap-2 text-sm text-gray-700">
+                  <p><strong>Area:</strong> {property.area} sq.ft</p>
+                  <p><strong>Bedrooms:</strong> {property.bedrooms}</p>
+                  <p><strong>Price:</strong> ₹{property.price}</p>
+                  <p><strong>Kitchens:</strong> {property.kitchens}</p>
+                  <p><strong>Bathrooms:</strong> {property.bathrooms}</p>
+                  <p><strong>Halls:</strong> {property.halls}</p>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-medium text-gray-800 mb-1">Amenities</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
+                    {property.tv && <li>📺 TV</li>}
+                    {property.ac && <li>❄️ Air Conditioner</li>}
+                    {property.wifi && <li>📶 WiFi</li>}
+                    {property.parking && <li>🅿️ Parking</li>}
+                    {property.furnised && <li>🛋️ Furnished</li>}
+                  </ul>
+                </div>
+
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(property.propertyId)}
+                >
+                  Delete from Wishlist
+                </button>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
 };
 
-export default Wishlist;
+export default Wishlist;
