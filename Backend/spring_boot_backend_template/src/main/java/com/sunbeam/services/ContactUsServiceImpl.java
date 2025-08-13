@@ -1,5 +1,7 @@
 package com.sunbeam.services;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,12 @@ public String addQuery(Long id, ContactUsDto dto) {
 	contact.setUserId(user);
 	contactDao.save(contact);
 	return "Query Added Successfully";
+}
+@Override
+public List<ContactUsDto> getAllQueries() {
+	List<ContactUs> list=contactDao.findAll();
+	
+	return list.stream().map(contact->mapper.map(contact, ContactUsDto.class)).toList();
 }
  
 }
