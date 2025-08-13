@@ -20,7 +20,11 @@ const UpdateProfile = () => {
   });
 
   const [error, setError] = useState('');
-
+ useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if(token === null)
+      navigate("/login")
+  });
   useEffect(() => {
     const fetchUser = async () => {
       try {

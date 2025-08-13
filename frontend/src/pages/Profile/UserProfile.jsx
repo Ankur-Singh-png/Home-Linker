@@ -11,6 +11,12 @@ const UserProfile = () => {
   const id = sessionStorage.getItem('userId');
 
   useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if(token === null)
+      navigate("/login")
+  });
+
+  useEffect(() => {
     const fetchUser = async () => {
       if (!id || !token) {
         console.error('Missing token or user ID');

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { fetchWishlist, removeFromWishlist } from '../services/Wishlist';
 import './Wishlist.css';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Wishlist = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const loadWishlist = async () => {
     setLoading(true);
@@ -22,6 +24,9 @@ const Wishlist = () => {
   };
 
   useEffect(() => {
+    const token = sessionStorage.getItem('token');
+      if(token === null)
+        navigate("/login")
     loadWishlist();
   }, []);
 

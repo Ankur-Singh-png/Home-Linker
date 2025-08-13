@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./PropertyFilter.css";
 import Item from "../components/Item"; // Assuming you have an Item component to display each property
+import { useNavigate } from "react-router-dom";
 
 const PropertyFilter = () => {
   const [properties, setProperties] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() =>{
+    const token = sessionStorage.getItem('token');
+      if(token === null)
+        navigate("/login")
+  });
   const [filters, setFilters] = useState({
     state: "",
     city: "",

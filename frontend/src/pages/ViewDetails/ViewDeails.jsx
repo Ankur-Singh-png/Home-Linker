@@ -10,7 +10,11 @@ const ViewDetails = () => {
   const [details, setDetails] = useState(null);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isBooking, setIsBooking] = useState(false);
-
+ useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if(token === null)
+      navigate("/login")
+  });
 
   useEffect(() => {
     const fetchProperty = async () => {

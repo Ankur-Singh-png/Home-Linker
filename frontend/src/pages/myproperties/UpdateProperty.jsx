@@ -8,7 +8,11 @@ import { fetchPropertyById, updateProperty } from "../../services/Property";
 const UpdateProperty = () => {
   const { userId, propertyId } = useParams();
   const navigate = useNavigate();
-
+ useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if(token === null)
+      navigate("/login")
+  });
   const [formData, setFormData] = useState({
     title: "",
     description: "",

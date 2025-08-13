@@ -10,7 +10,11 @@ const MyProperties = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-
+ useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if(token === null)
+      navigate("/login")
+  });
 
   const handleUpdate = (propertyId) => {
    

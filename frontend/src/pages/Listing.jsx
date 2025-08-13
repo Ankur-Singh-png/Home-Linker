@@ -3,6 +3,7 @@ import Item from '../components/Item'
 import { FaLocationDot } from 'react-icons/fa6'
 import { getAllAvailableProperties } from '../services/Property'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 const Listing = () => {
@@ -12,10 +13,14 @@ const Listing = () => {
   const [showSearchResults,setShowSearchResults] = useState(false)
   const [noResults, setNoResults] = useState(false);
   const [input, setInput] = useState("");
+  const navigate = useNavigate();
 
 
 
   useEffect(() => {
+    const token = sessionStorage.getItem('token');
+      if(token === null)
+        navigate("/login")
     const fetchPropertiesByDate = async () => {
       try {
         const res = await getAllAvailableProperties();

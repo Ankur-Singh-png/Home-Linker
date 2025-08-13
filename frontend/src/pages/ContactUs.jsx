@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ContactUs.css';
 import emailIcon from '../assets/email-icon.jpg';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ContactUs = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
     description: '',
+  },[]);
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('token');
+  if(token === null)
+    navigate("/login")
   });
 
   const handleChange = (e) => {

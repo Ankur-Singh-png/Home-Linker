@@ -11,7 +11,12 @@ const Bookings = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const navigate = useNavigate();
 
-
+useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if(token === null)
+      navigate("/login")
+    fetchBookings();
+  }, []);
   const fetchBookings = async () => {
     try {
       const data = await getUserBookings();
@@ -21,12 +26,7 @@ const Bookings = () => {
     }
   };
 
-  useEffect(() => {
-    const token = sessionStorage.getItem('token');
-  if(token === null)
-    navigate("/login")
-    fetchBookings();
-  }, []);
+  
 
   const handleDelete = async (propertyId) => {
     if (window.confirm("Are you sure you want to delete this booking?")) {
