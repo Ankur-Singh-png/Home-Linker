@@ -2,6 +2,7 @@ package com.sunbeam.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,5 +23,10 @@ public class ContactUsController {
 	@PostMapping("/addQuery/{id}")
 	public ResponseEntity<?> addQuery(@PathVariable Long id , @RequestBody ContactUsDto dto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(contactService.addQuery(id , dto));
+	}
+	
+	@GetMapping("/getQuery")
+	public ResponseEntity<?> getQueries(){
+		return ResponseEntity.status(HttpStatus.CREATED).body(contactService.getAllQueries());
 	}
 }
