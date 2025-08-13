@@ -67,6 +67,24 @@ export const getAllPropertiesByDate = async () => {
 
 } 
 
+export const getAllAvailableProperties = async () => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const url = `http://localhost:8080/property/listing`;
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log("response from getAllPropertiesByDate: ", response);
+    return response;
+  } catch (error) {
+    console.error('Error fetching properties:', error);
+    throw error;
+  } 
+
+} 
+
 export const addtowishlist = async (propertyId) => {
   try {
     const response = await axios.post(

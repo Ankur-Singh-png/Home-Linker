@@ -40,4 +40,7 @@ public interface PropertyService {
 	PropertyDto findPropertyByIdAndOwnerId(Long userId, Long propertyId);
 	
 	String updatePropertyByUser(Long userId, Long propertyId, UpdatePropertyDTO  dto);
+
+	List<PropertyDto> getAllPropertiesAvailable();
+
 }

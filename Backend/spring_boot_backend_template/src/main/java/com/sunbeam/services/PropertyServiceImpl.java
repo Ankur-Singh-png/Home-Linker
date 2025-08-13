@@ -168,4 +168,10 @@ public class PropertyServiceImpl implements PropertyService {
 	    return "Property updated successfully";
 	}
 
+	@Override
+	public List<PropertyDto> getAllPropertiesAvailable() {
+		List<Property> list = propertydao.findByAvailable(true);
+		return list.stream().map(property->mapper.map(property, PropertyDto.class)).toList();
+	}
+
 }

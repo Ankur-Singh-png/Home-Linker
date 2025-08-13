@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { PROPERTIES } from '../constants/data'
 import Item from '../components/Item'
 import { FaLocationDot } from 'react-icons/fa6'
-import { getAllPropertiesByDate } from '../services/Property'
+import { getAllAvailableProperties } from '../services/Property'
 
 
 const Listing = () => {
@@ -13,7 +13,7 @@ const Listing = () => {
   useEffect(() => {
     const fetchPropertiesByDate = async () => {
       try {
-        const res = await getAllPropertiesByDate();
+        const res = await getAllAvailableProperties();
         setproperties(res.data);
         console.log("properties fetched:", res.data);
       } catch (err) {

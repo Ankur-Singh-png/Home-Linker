@@ -127,7 +127,10 @@ public class PropertyController {
        
     }
 
-
+   @GetMapping("/listing")
+   public ResponseEntity<?> getAllProperties(){
+	   return ResponseEntity.ok(propertyService.getAllPropertiesAvailable());
+   }
 
 
 }
