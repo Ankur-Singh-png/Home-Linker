@@ -140,7 +140,7 @@ const Bookings = () => {
                         onClick={() => handleDelete(property.propertyId)}
                         className="delete-btn"
                       >
-                        Delete
+                        Cancel
                       </button>
                     </div>
                   )}

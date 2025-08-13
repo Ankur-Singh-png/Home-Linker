@@ -22,14 +22,11 @@ public class ContactUs {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	@Column(name="first_name")
-	private String firstName;
+	private String first_name;
 	@Column(name="last_name")
-	private String lastName;
-	@Column(unique = true)
-	private String email;
+	private String last_name;
 	@Column(length=200)
 	private String description;
-	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User userId;
