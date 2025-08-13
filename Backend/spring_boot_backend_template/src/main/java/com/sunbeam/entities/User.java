@@ -80,8 +80,7 @@ public class User implements UserDetails {
 	public Long getId() {
 		return this.id;
 	}
-	
-	
+   
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Property> properties = new ArrayList<Property>();
 
