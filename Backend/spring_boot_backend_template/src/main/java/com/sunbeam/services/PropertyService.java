@@ -36,11 +36,12 @@ public interface PropertyService {
 
 	public String updatePropertyById(Long id , Property dto);
 
-
 	PropertyDto findPropertyByIdAndOwnerId(Long userId, Long propertyId);
 	
 	String updatePropertyByUser(Long userId, Long propertyId, UpdatePropertyDTO  dto);
 
 	List<PropertyDto> getAllPropertiesAvailable();
+	
+	List<PropertyDto> SerachByKeyword(String keyword);
 
 }

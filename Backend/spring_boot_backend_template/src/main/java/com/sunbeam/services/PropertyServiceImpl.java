@@ -173,5 +173,13 @@ public class PropertyServiceImpl implements PropertyService {
 		List<Property> list = propertydao.findByAvailable(true);
 		return list.stream().map(property->mapper.map(property, PropertyDto.class)).toList();
 	}
+	@Override
+	public List<PropertyDto> SerachByKeyword(String keyword) {
+		System.out.println(keyword);
+		List<Property> properties = propertydao.searchByKeyword(keyword);
+		properties.forEach(property -> System.out.println(property.toString()));
+		return properties.stream().map(property -> mapper.map(property, PropertyDto.class)).toList();
+
+	}
 
 }
