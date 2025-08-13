@@ -56,12 +56,18 @@ const Header = () => {
 
             {/* Buttons */}
             <div className='flexBetween gap-x-3 sm:gap-x-5 bold-16'>
-              <Link to="/login">
-              <button className='btn-secondary flexCenter gap-x-2 medium-16 rounded-full'>
+         
+              <button className='btn-secondary flexCenter gap-x-2 medium-16 rounded-full'
+               onClick={() => {
+                sessionStorage.removeItem('token');
+                sessionStorage.removeItem('userId');
+                navigate('/login');
+              }}
+              >
                 <RiLogoutBoxRLine style={{fontSize: '19px'}}/>
                 <span>Logout</span>
               </button>
-              </Link>
+         
 
               <div>
               <GiHamburgerMenu style={{ color: '#8ac243', fontSize: '24px' , margin:'5px'}} onClick={() => setShowNav(!showNav)}/>
