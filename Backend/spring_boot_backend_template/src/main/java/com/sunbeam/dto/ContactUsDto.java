@@ -18,5 +18,4 @@ public class ContactUsDto {
  private String last_name;
  @NotBlank
  private String description;
- private Long userId;
 }

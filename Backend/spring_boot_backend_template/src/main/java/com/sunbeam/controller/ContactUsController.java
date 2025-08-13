@@ -25,8 +25,5 @@ public class ContactUsController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(contactService.addQuery(id , dto));
 	}
 	
-	@GetMapping("/getQuery")
-	public ResponseEntity<?> getQueries(){
-		return ResponseEntity.status(HttpStatus.CREATED).body(contactService.getAllQueries());
-	}
+	
 }
